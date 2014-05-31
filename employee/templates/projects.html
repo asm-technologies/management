@@ -1,0 +1,52 @@
+{% extends "banner_base.html" %}
+
+{% load i18n %}
+
+
+
+{% block head_title %}{% trans "Welcome" %}{% endblock %}
+
+{% block body_class %}home{% endblock %}
+
+
+<!-- 
+{% block extra_head %}
+<link rel="stylesheet" href="{{ STATIC_URL }}css/custom.css">
+{% endblock %}
+ -->
+
+
+{% block banner %}
+    {% if user.is_authenticated %} 
+        <h1>Project List</h1>
+        <div class="container-fluid">
+        <table class="table table-condensed">
+        <tr>
+            <th>Project Name</th>
+            <th>Short Description</th>
+        </tr>
+        {% for x in proj_values %}
+            <tr> 
+                <td>{{ x.name }} </td>
+                <td>{{ x.description }} </td>
+            </tr>
+        {% endfor %}
+        </table>
+        </div>
+        
+    {% else %}
+
+    <h1>{% trans "Welcome to ASM" %}</h1>
+    
+    <h2>About resource management</h2>
+    <p>
+        {% blocktrans %}
+        This site is used to manage project and resources..
+        {% endblocktrans %}
+    </p>
+   
+        {% url "account_login" as login_url %}
+        {% url "account_signup" as signup_url %}
+        <p>{% blocktrans %}You can <a href="{{ login_url }}" class="btn btn-primary">Log In</a>{% endblocktrans %}</p>
+    {% endif %}
+{% endblock %}

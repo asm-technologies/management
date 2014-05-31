@@ -1,0 +1,5 @@
+.navbar-inverse {
+   background-color: #000000;
+   fonts: #fcfcfc;
+
+}
