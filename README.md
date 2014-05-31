@@ -1,7 +1,9 @@
-pinax-project-account
+Management-project-ASM 
 =====================
 
-a starter project the incorporates account features from django-user-accounts
+This project is designed to manage all Employee details of an organization . Has graph,employee and project details.
+
+Uses django-pinax module
 
 
 Usage:
