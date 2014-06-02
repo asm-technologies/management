@@ -15,9 +15,11 @@ from employee.models import *
 #  	return render_to_response("homepage.html",context_instance=RequestContext(request))
 
 def employee(request):
-	return render_to_response("employee.html",{"employee":"active"},context_instance=RequestContext(request))
+	employees = Employee.objects.filter().values()
+	employees_count = Employee.objects.filter().count()
+	return render_to_response("employee.html",{"employee":"active","employees":employees,"employees_count":employees_count},context_instance=RequestContext(request))
 
-def projects(request):
+def projects_main(request):
 	projs = Project.objects.filter().values()
 	proj_values = []
 	for x in projs:
@@ -25,7 +27,12 @@ def projects(request):
 		name = x['name']
 		description = x['description']
 		proj_values.append({"ID":ID,"name":name,"description":description})
-	return render_to_response("projects.html",{"projects":"active","proj_values":proj_values},context_instance=RequestContext(request))
+	return render_to_response("projects_main.html",{"projects":"active","proj_values":proj_values},context_instance=RequestContext(request))
+
+def projects(request,proj_id):
+	proj = Project.objects.filter(id=proj_id).values()
+	employees = Employee.objects.filter(proj=proj_id).values()
+	return render_to_response("projects.html",{"projects":"active","proj":proj[0],"employees":employees},context_instance=RequestContext(request))
 
 def home(request):
 	available_pjs = Project.objects.filter().values('id')
@@ -33,9 +40,9 @@ def home(request):
 	for x in available_pjs:
 		ID = x['id']
 		proj_name = Project.objects.filter(id=ID).values('name')[0]['name']
-		project = Employee.objects.filter(proj=ID).count()
+		bill = Employee.objects.filter(proj=ID,bill=1).count()
 		not_bill = Employee.objects.filter(proj=ID,bill=0).count()
-		dict1.append({"ID":ID,"proj_name":proj_name,"project":project,"not_bill":not_bill})
+		dict1.append({"ID":ID,"proj_name":proj_name,"bill":bill,"not_bill":not_bill})
 		
 		dict2 = dict1[:]
 	

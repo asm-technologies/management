@@ -11,29 +11,23 @@
 
 {% block banner %}
     {% if user.is_authenticated %} 
-        <h1>{{ proj.name }}</h1>
-        <h2> Description : </h2>
-        <p> {{ proj.description }} <p>
-
+        <h1>Project List {{ proj_id }}</h1>
         <div class="container-fluid">
         <table class="table table-condensed">
         <tr>
-            <th>Employee ID</th>
-            <th>Employee Name</th>
-            <th>Start Date</th>
-            <th>Bill Status</th>
+            <th>Project ID</th>
+            <th>Project Name</th>
+            <th>Short Description</th>
         </tr>
-        {% for x in employees %}
+        {% for x in proj_values %}
             <tr> 
-                <td>{{ x.id }} </td>
-                <td>{{ x.name }}</td>
-                <td>{{ x.start_date }} </td>
-                <td>{{ x.bill }} </td>
+                <td>{{ x.ID }} </td>
+                <td><a href="/projects/{{ x.ID }}">{{ x.name }}</a></td>
+                <td>{{ x.description }} </td>
             </tr>
         {% endfor %}
         </table>
         </div>
-      
         
     {% else %}
 

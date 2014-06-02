@@ -45,9 +45,9 @@
     <script src="{% static "js/bootstrap.min.js" %}"></script>
     <script src="{% static "pinax/js/theme.js" %}"></script>
 {% block extra_script %}
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-        <script src="http://code.highcharts.com/highcharts.js"></script>
-        <script src="http://code.highcharts.com/modules/exporting.js"></script>
+        <script type="text/javascript" src="{% static "js/jquery.min.js" %}"></script>
+        <script src="{% static "js/highcharts.js" %}"></script>
+        <script src="{% static "js/exporting.js" %}"></script>
         <script type="text/javascript">
         $(document).ready(function () {
             function createChart(container, text, valA, valB) {
@@ -73,7 +73,7 @@
   });
 }
 {% for pjs in mylist %}
-createChart('#dashboard{{ pjs.ID }}',"{{ pjs.proj_name }}",{{ pjs.project }},{{ pjs.not_bill }});
+createChart('#dashboard{{ pjs.ID }}',"{{ pjs.proj_name }}",{{ pjs.bill }},{{ pjs.not_bill }});
 {% endfor %}
 
         })
