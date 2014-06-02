@@ -6,18 +6,18 @@ This project is designed to manage all Employee details of an organization . Has
 Uses django-pinax module
 
 
-Usage:
-
-    django-admin.py startproject --template=https://github.com/pinax/pinax-project-account/zipball/master <project_name>
-
-Getting Started:
+Installing and Getting Started:
 
     pip install virtualenv
-    virtualenv mysiteenv
-    source mysiteenv/bin/activate
-    pip install Django==1.6.2
-    django-admin.py startproject --template=https://github.com/pinax/pinax-project-account/zipball/master mysite
-    cd mysite
-    pip install -r requirements.txt
-    python manage.py syncdb
-    python manage.py runserver
+    virtualenv management-env             ## create a directory where virtual environment will run and all dependent libraries will be available
+    source management-env/bin/activate   ## Now you will be inside virutal environment & Type deactivate to deactivate virtual env
+    cd management-env
+    pip install -r requirements.txt     #install all dependent modules
+    
+    
+Clone source code :
+	mkdir management
+	cd management
+	git clone https://github.com/asm-technologies/management.git
+	python manage.py syncdb				## to sync flat file db
+    python manage.py runserver		    ## Now type localhost:8000 in local browser to view site
