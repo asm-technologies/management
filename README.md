@@ -14,10 +14,12 @@ Installing and Getting Started:
     cd management-env
     pip install -r requirements.txt     #install all dependent modules
     
-    
+============================================================================================================================
+
 Clone source code :
+	
 	mkdir management
 	cd management
 	git clone https://github.com/asm-technologies/management.git
 	python manage.py syncdb				## to sync flat file db
-    python manage.py runserver		    ## Now type localhost:8000 in local browser to view site
+	python manage.py runserver		    ## Now type localhost:8000 in local browser to view site
