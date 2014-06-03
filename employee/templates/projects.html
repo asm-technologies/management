@@ -9,20 +9,58 @@
 {% block body_class %}home{% endblock %}
 
 
+
+{% block extra_head %}
+<script type="text/javascript">
+{% block extra_script %}
+    $(document).ready(function () {
+  
+         dataTab();
+    });
+        
+      
+    function dataTab()
+    {
+    $("#Proj_emp_table").dataTable({
+                               "scrollX": true,
+                                       "dom": 'T<"clear">lfrtip',
+                               "tableTools": {
+                                       "sSwfPath": "/home/copy_csv_xls_pdf.swf",
+                                       }
+                         });
+     }
+ 
+ </script>
+
+
+{% endblock %}
+{% endblock %}
+
+
 {% block banner %}
     {% if user.is_authenticated %} 
-        <h1>{{ proj.name }}</h1>
-        <h2> Description : </h2>
-        <p> {{ proj.description }} <p>
+     
+         <div class="row">
+          <div id="sidebar" class="sidebar-nav span3">
+            <ul class="nav nav-pills nav-stacked">
+            {% for x in proj_values %}
+              <li class="nav-menu"><a href="/projects/{{ x.id }}">{{ x.name }}</a></li>
+            {% endfor %}
+            </ul>
+          </div>
+
+        <h3>{{ proj.name }}</h3>
+       
 
         <div class="container-fluid">
-        <table class="table table-condensed">
-        <tr>
+         <table id='Proj_emp_table' border='1'>
+        <thead>
             <th>Employee ID</th>
             <th>Employee Name</th>
             <th>Start Date</th>
             <th>Bill Status</th>
-        </tr>
+        </thead>
+        
         {% for x in employees %}
             <tr> 
                 <td>{{ x.id }} </td>
@@ -33,8 +71,6 @@
         {% endfor %}
         </table>
         </div>
-      
-        
     {% else %}
 
     <h1>{% trans "Welcome to ASM" %}</h1>
@@ -51,3 +87,5 @@
         <p>{% blocktrans %}You can <a href="{{ login_url }}" class="btn btn-primary">Log In</a>{% endblocktrans %}</p>
     {% endif %}
 {% endblock %}
+
+

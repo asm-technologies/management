@@ -8,27 +8,69 @@
 
 {% block body_class %}home{% endblock %}
 
+{% block extra_head %}
+<script type="text/javascript">
+{% block extra_script %}
+    $(document).ready(function () {
+  
+         dataTab();
+    });
+        
+      
+    function dataTab()
+    {
+    $("#Proj_emp_table").dataTable({
+                               "scrollX": true,
+                                       "dom": 'T<"clear">lfrtip',
+                               "tableTools": {
+                                       "sSwfPath": "/home/copy_csv_xls_pdf.swf",
+                                       }
+                         });
+     }
+ 
+ </script>
+
+
+{% endblock %}
+{% endblock %}
+
 
 {% block banner %}
     {% if user.is_authenticated %} 
-        <h1>Project List {{ proj_id }}</h1>
+
+
+         <div class="row">
+          <div id="sidebar" class="sidebar-nav span3">
+            <ul class="nav nav-pills nav-stacked">
+            {% for x in proj_values %}
+              <li class="nav-menu"><a href="/projects/{{ x.ID }}">{{ x.name }}</a></li>
+            {% endfor %}
+            </ul>
+          </div>
+
+           <h3>{{ first_proj.name }}</h3>
+       
+
         <div class="container-fluid">
-        <table class="table table-condensed">
-        <tr>
-            <th>Project ID</th>
-            <th>Project Name</th>
-            <th>Short Description</th>
-        </tr>
-        {% for x in proj_values %}
+         <table id='Proj_emp_table' border='1'>
+        <thead>
+            <th>Employee ID</th>
+            <th>Employee Name</th>
+            <th>Start Date</th>
+            <th>Bill Status</th>
+        </thead>
+        
+        {% for x in employees %}
             <tr> 
-                <td>{{ x.ID }} </td>
-                <td><a href="/projects/{{ x.ID }}">{{ x.name }}</a></td>
-                <td>{{ x.description }} </td>
+                <td>{{ x.id }} </td>
+                <td>{{ x.name }}</td>
+                <td>{{ x.start_date }} </td>
+                <td>{{ x.bill }} </td>
             </tr>
         {% endfor %}
         </table>
         </div>
-        
+         
     {% else %}
 
     <h1>{% trans "Welcome to ASM" %}</h1>
@@ -45,3 +87,5 @@
         <p>{% blocktrans %}You can <a href="{{ login_url }}" class="btn btn-primary">Log In</a>{% endblocktrans %}</p>
     {% endif %}
 {% endblock %}
+
+

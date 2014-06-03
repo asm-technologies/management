@@ -15,6 +15,7 @@
         
 $(document).ready(function () {
   function createChart(container, text, valA, valB) {
+  alert(valA,calB);
   $(container).highcharts({
     chart: {
         plotBackgroundColor: null,
@@ -38,7 +39,7 @@ $(document).ready(function () {
 }
 
 {% for pjs in mylist %}
-createChart('#dashboard{{ pjs.ID }}',"{{ pjs.proj_name }}",{{ pjs.bill }},{{ pjs.not_bill }});
+createChart('#dashboard{{ pjs.ID }}',"{{ pjs.proj_name }}",{{ pjs.project }},{{ pjs.not_bill }});
 {% endfor %}
 
  

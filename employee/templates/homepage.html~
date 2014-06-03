@@ -29,8 +29,8 @@
    
  
    
-        {% url "account_login" as login_url %}
-        
+       
+        {% url "account_signup" as signup_url %}
         <p>{% blocktrans %}You can <a href="{{ login_url }}" class="btn btn-primary">Log In</a>{% endblocktrans %}</p>
     {% endif %}
 {% endblock %}
