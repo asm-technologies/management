@@ -18,11 +18,6 @@ def employee(request):
 		mobile = Employee.objects.filter(id=ID).values('mobile')[0]['mobile']
 		email = Employee.objects.filter(id=ID).values('email')[0]['email']
 		dict1.append({"emp_name":emp_name,"mobile":mobile,"email":email,"ID":ID})
-		
-		
-		
-	
-
 	return render_to_response("employee.html",{"employee":"active",'mylist':dict1},context_instance=RequestContext(request))
 	
 

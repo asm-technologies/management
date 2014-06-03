@@ -6,8 +6,9 @@ from employee.models import *
 
 class EmployeeAdmin(admin.ModelAdmin):
 	search_fields = ['name']
-	list_display = ('name','bill','mobile','email')
+	list_display = ('name','dob','bill','mobile','email')
 	list_filter = ('bill','proj')
+
 	#inlines = [ UserProfileInline, ]
 
 # admin.site.unregister(Account)
