@@ -10,15 +10,11 @@ from employee.models import *
 
 
 def employees_main(request):
-	available_pjs = Employee.objects.filter().values('id')
-	dict1 = []
-	for x in available_pjs:
-		ID = x['id']
-		emp_name = Employee.objects.filter(id=ID).values('name')[0]['name']
-		mobile = Employee.objects.filter(id=ID).values('mobile')[0]['mobile']
-		email = Employee.objects.filter(id=ID).values('email')[0]['email']
-		dict1.append({"emp_name":emp_name,"mobile":mobile,"email":email,"ID":ID})
-	return render_to_response("employee_main.html",{"employee":"active",'mylist':dict1},context_instance=RequestContext(request))
+	all_employee = Employee.objects.filter().values()
+	for x in all_employee:
+		projs = Project.objects.filter(id=x['proj_id']).values()
+		x['proj'] = projs[0]['name']
+	return render_to_response("employee_main.html",{"employee":"active",'all_employee':all_employee},context_instance=RequestContext(request))
 
 def employees(request,emp_id):
 	employees = Employee.objects.filter(id=emp_id).values()
