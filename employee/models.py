@@ -20,6 +20,7 @@ class Employee(models.Model):
 	Qualification = models.CharField(max_length = 100)
 	Visa_Status = models.CharField(max_length = 100)
 	Skill_sets = models.CharField(max_length = 100)
+	# Address = models.CharField(max_length = 200,blank=True)
 	# qualif_choices = ['BE','B.Tech','MBA','MS','MCA']
 	# qualif = models.CharField(max_length=10,choices=qualif,default=BE)
 	mobile=models.IntegerField(max_length = 12)
