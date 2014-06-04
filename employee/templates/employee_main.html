@@ -1,0 +1,75 @@
+{% extends "banner_base.html" %}
+
+{% load i18n %}
+
+
+
+{% block head_title %}{% trans "Welcome" %}{% endblock %}
+
+{% block body_class %}home{% endblock %}
+
+
+
+{% block extra_head %}
+<script type="text/javascript">
+{% block extra_script %}
+	$(document).ready(function () {
+  
+ 		 dataTab();
+	});
+        
+      
+	function dataTab()
+	{
+	$("#Emp_table").dataTable({
+		                       "scrollX": true,
+		                               "dom": 'T<"clear">lfrtip',
+		                       "tableTools": {
+		                               "sSwfPath": "/home/copy_csv_xls_pdf.swf",
+		                               }
+		                 });
+	 }
+ 
+ </script>
+
+
+{% endblock %}
+{% endblock %}
+
+
+
+{% block banner %}
+    {% if user.is_authenticated %} 
+        <h3>Employee Details</h3>
+        <table id='Emp_table' border='1'>
+         		<thead><th>EMP ID</th><th>NAME</th><th>Desgination</th><th>Current Project</th><th>Visa Status</th>
+                </thead><tbody>
+         {% for emp in all_employee %}
+      	<tr>
+     		<td>{{emp.id}}</td><td><a href="/employee/{{ emp.id }}">{{emp.name}}</td><td>{{emp.Desgination}}</td>
+            <td>{{emp.proj}}</td>
+            <td>{{emp.Visa_Status}}</td>
+       
+          
+        
+     	</tr>
+  
+        {% endfor %}
+        </tbody>
+        </table>
+      
+    {% else %}
+
+    <h1>{% trans "Welcome to ASM" %}</h1>
+    
+    
+    <h2>About resource management</h2>
+   
+        {% url "account_login" as login_url %}
+        {% url "account_signup" as signup_url %}
+        <p>{% blocktrans %}You can <a href="{{ login_url }}" class="btn btn-primary">Log In</a>{% endblocktrans %}</p>
+    {% endif %}
+{% endblock %}
+{% block footer %}
+    {% include "_footer.html" %}
+{% endblock %}
