@@ -10,50 +10,12 @@
 
 
 
-{% block extra_head %}
-<script type="text/javascript">
-{% block extra_script %}
-	$(document).ready(function () {
-  
- 		 dataTab();
-	});
-        
-      
-	function dataTab()
-	{
-	$("#Emp_table").dataTable({
-		                       "scrollX": true,
-		                               "dom": 'T<"clear">lfrtip',
-		                       "tableTools": {
-		                               "sSwfPath": "/home/copy_csv_xls_pdf.swf",
-		                               }
-		                 });
-	 }
- 
- </script>
-
-
-{% endblock %}
-{% endblock %}
-
-
-
 {% block banner %}
     {% if user.is_authenticated %} 
         <h3>Employee Details</h3>
-         <table id='Emp_table' border='1'>
-         		<thead><th>NAME</th><th>MOBILE</th><th>EMAIL</th></thead><tbody>
-         {% for pjs2 in mylist %}
-      	<tr>
-     		<td>{{pjs2.emp_name}}</td><td>{{pjs2.mobile}}</td><td>{{pjs2.email}}</td>
-       
-          
-        
-     	</tr>
-  
+        {% for key,values in employees.items %}
+            <h4> {{ key }} : {{ values }} </h4>
         {% endfor %}
-        </tbody>
-        </table>
       
     {% else %}
 

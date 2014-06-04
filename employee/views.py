@@ -9,7 +9,7 @@ from django.http import HttpResponse
 from employee.models import *
 
 
-def employee(request):
+def employees_main(request):
 	available_pjs = Employee.objects.filter().values('id')
 	dict1 = []
 	for x in available_pjs:
@@ -18,7 +18,12 @@ def employee(request):
 		mobile = Employee.objects.filter(id=ID).values('mobile')[0]['mobile']
 		email = Employee.objects.filter(id=ID).values('email')[0]['email']
 		dict1.append({"emp_name":emp_name,"mobile":mobile,"email":email,"ID":ID})
-	return render_to_response("employee.html",{"employee":"active",'mylist':dict1},context_instance=RequestContext(request))
+	return render_to_response("employee_main.html",{"employee":"active",'mylist':dict1},context_instance=RequestContext(request))
+
+def employees(request,emp_id):
+	employees = Employee.objects.filter(id=emp_id).values()
+	return render_to_response("employee.html",{"employee":"active",'employees':employees[0]},context_instance=RequestContext(request))
+	
 	
 
 def projects_main(request):
