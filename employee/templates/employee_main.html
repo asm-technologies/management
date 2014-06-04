@@ -24,9 +24,20 @@
 	$("#Emp_table").dataTable({
 		                       "scrollX": true,
 		                               "dom": 'T<"clear">lfrtip',
-		                       "tableTools": {
-		                               "sSwfPath": "/home/copy_csv_xls_pdf.swf",
-		                               }
+                                  "oTableTools": {
+            "sSwfPath": "/site_media/static/copy_csv_xls_pdf.swf",
+            "aButtons": [
+                "print",
+                {
+                    "sExtends": "xls",
+                    "sButtonText": "Excel",
+                    "sFileName": "*.xls"
+                }
+
+            ]
+        }
+		                       
+                            
 		                 });
 	 }
  
@@ -42,12 +53,20 @@
     {% if user.is_authenticated %} 
         <h3>Employee Details</h3>
         <table id='Emp_table' border='1'>
-         		<thead><th>EMP ID</th><th>NAME</th><th>Desgination</th><th>Current Project</th><th>Visa Status</th>
+         		<thead><th>EMP ID</th><th>NAME</th><th>Desgination</th><th>Current Project</th>
+                <th>Joining Date</th><th>Billable Status</th>
+                <th>Qualifiction</th><th>Skill Sets</th><th>Experience</th>    
+                <th>Visa Status</th>
                 </thead><tbody>
          {% for emp in all_employee %}
       	<tr>
      		<td>{{emp.id}}</td><td><a href="/employee/{{ emp.id }}">{{emp.name}}</td><td>{{emp.Desgination}}</td>
             <td>{{emp.proj}}</td>
+            <td>{{emp.doj}}</td>
+            <td>{{emp.bill}}</td>
+            <td>{{emp.Skill_sets}}</td>
+            <td>{{emp.exp}}</td>
+            <td>{{emp.Qualification}}</td>
             <td>{{emp.Visa_Status}}</td>
        
           
