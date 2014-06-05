@@ -12,44 +12,9 @@
     <script src="http://cdn.datatables.net/1.10.0/js/jquery.dataTables.js"></script>
     <script src="https://datatables.net/release-datatables/extensions/TableTools/js/dataTables.tableTools.js"></script>
     
-    <script type="text/javascript">
+   
 {% block extra_script %}
         
-$(document).ready(function () {
-  function createChart(container, text, valA, valB) {
-  $(container).highcharts({
-    chart: {
-        plotBackgroundColor: null,
-        plotBorderWidth: null,
-        plotShadow: false
-    },
-    tooltip: {
-        pointFormat: '{series.name}: {point.y}</b>'
-    },
-
-    title: { text: text },
-    series: [{
-      type: 'pie',
-      name: text,
-      data: [
-        ['Bill',   valA ],
-        ['Non-Bill', valB ],
-      ]
-    }]
-  });
-}
-
-{% for pjs in mylist %}
-createChart('#dashboard{{ pjs.ID }}',"{{ pjs.proj_name }}",{{ pjs.bill }},{{ pjs.not_bill }});
-{% endfor %}
-
- 
-});
-        
-      
-
-        </script>
-
 
 {% endblock %}
 {% endblock %}
