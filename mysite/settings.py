@@ -134,7 +134,7 @@ INSTALLED_APPS = [
     "account",
     "eventlog",
     "metron",
-    # "south",
+    "south",
     
     # project
     "mysite",
