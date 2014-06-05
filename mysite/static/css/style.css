@@ -5,9 +5,8 @@ padding:0px;
 .main_div
 {
 	margin: 0 auto;
-    max-width: 1453px;
-    min-width: 1024px;
-   
+    max-width: 1200px;
+    
 }
 #heading
 {
@@ -133,9 +132,9 @@ padding:0px;
 
 
 #centerDiv .row {
-    margin-left: 85px;
-    margin-right: 0px;
-    margin-top:6px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top:auto;
 }
 
 
