@@ -14,7 +14,7 @@ padding:0px;
 	background: url('/site_media/static/home_bg.jpg');
 	color:green;
 	padding:0px;
-	height:174px;
+	height:117px;
 	z-index: -99;
 	border:0px;
 	width:100%;
@@ -23,9 +23,8 @@ padding:0px;
 }
 
 #centerDiv{
-	width:1100px;
-	margin:0px auto;
-	margin-top:-64px;	
+	width:100%;
+		
 }
 
 #tabs
@@ -120,8 +119,7 @@ padding:0px;
 .navbar 
 {
 	margin: 0 auto;
-    max-width: 1024px;
-    min-width: 1024px;
+    width: 100%;
 }
 
 #tabs ul
@@ -135,9 +133,9 @@ padding:0px;
 
 
 #centerDiv .row {
-    margin-left: -19px;
-    margin-right: -15px;
-    margin-top:11px;
+    margin-left: 85px;
+    margin-right: 0px;
+    margin-top:6px;
 }
 
 
