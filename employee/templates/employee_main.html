@@ -15,7 +15,25 @@
 {% block extra_script %}
 <script type="text/javascript">
 $(document).ready(function() {
-    var table = $('#Emp_table').DataTable();
+    var table = $('#Emp_table').DataTable({
+                               // "scrollX": true,
+                                "dom": 'T<"clear">lfrtip',
+                                 "oTableTools": {
+            "sSwfPath": "/site_media/static/copy_csv_xls_pdf.swf",
+            "aButtons": [
+                "print",
+                "pdf",
+                {
+                    "sExtends": "xls",
+                    "sButtonText": "Excel",
+                    "sFileName": "*.xls"
+                }
+
+            ]
+        }
+                               
+                            
+                         });
  
     $("#Emp_table tfoot th").each( function ( i ) {
         var select = $('<select><option value=""></option></select>')

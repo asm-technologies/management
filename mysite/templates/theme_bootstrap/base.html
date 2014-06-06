@@ -4,6 +4,7 @@
 <html lang="{{ LANGUAGE_CODE }}">
     <head>
         <meta charset="utf-8" />
+        <link rel="shortcut icon" href="{% static "asm_logo.jpg" %}">
         <title>{% block head_title_base %}{% if SITE_NAME %}{{ SITE_NAME }} | {% endif %}{% block head_title %}{% endblock %}{% endblock %}</title>
         {% block viewport %}
             <meta name="viewport" content="width=device-width, initial-scale=1.0">

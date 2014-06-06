@@ -12,22 +12,41 @@
 
 {% block extra_script %}
 <script type="text/javascript">
-    $(document).ready(function () {
-  
-         dataTab();
-    });
-        
-      
-    function dataTab()
-    {
-    $("#Proj_emp_table").dataTable({
-                               "scrollX": true,
-                                       "dom": 'T<"clear">lfrtip',
-                               "tableTools": {
-                                       "sSwfPath": "/home/copy_csv_xls_pdf.swf",
-                                       }
+   $(document).ready(function() {
+    var table = $('#Proj_emp_table').DataTable({
+                               // "scrollX": true,
+                                "dom": 'T<"clear">lfrtip',
+                                 "oTableTools": {
+            "sSwfPath": "/site_media/static/copy_csv_xls_pdf.swf",
+            "aButtons": [
+                "print",
+                "pdf",
+                {
+                    "sExtends": "xls",
+                    "sButtonText": "Excel",
+                    "sFileName": "*.xls"
+                }
+
+            ]
+        }
+                               
+                            
                          });
-     }
+ 
+    $("#Proj_emp_table tfoot th").each( function ( i ) {
+        var select = $('<select><option value=""></option></select>')
+            .appendTo( $(this).empty() )
+            .on( 'change', function () {
+                table.column( i )
+                    .search( $(this).val() )
+                    .draw();
+            } );
+ 
+        table.column( i ).data().unique().sort().each( function ( d, j ) {
+            select.append( '<option value="'+d+'">'+d+'</option>' )
+        } );
+    } );
+} );
  
  </script>
 
@@ -52,15 +71,20 @@
         </div>
         <div class="col-sm-9">
  
-        <h3>{{ first_proj.name }}</h3>
-        <table id='Proj_emp_table' border='1'>
+        <h4>{{ first_proj.name }}</h4>
+        <table id='Proj_emp_table' class="display" cellspacing="0" width="100%">
         <thead>
             <th>Employee ID</th>
             <th>Employee Name</th>
             <th>Start Date</th>
             <th>Bill Status</th>
         </thead>
-        
+            <tfoot>
+            <th>Employee ID</th>
+            <th>Employee Name</th>
+            <th>Start Date</th>
+            <th>Bill Status</th>
+            </tfoot>
         {% for x in employees %}
             <tr> 
                 <td>{{ x.id }} </td>
