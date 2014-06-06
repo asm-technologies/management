@@ -161,6 +161,7 @@ padding:0px;
 	width: 33.3333%;
 }
 
+/* This is datatable */
 #Emp_table
 {
     border-collapse: collapse;
@@ -178,22 +179,27 @@ padding:0px;
     width: 191px;
 }
 
-#sidebar {
-    background-color: #E7E7E7;
-    font-size: 14px;
-    font-family: 'Asap';
-    bottom: 0;
-    margin-left: -133px;
-    margin-top: 114px;
-    position: absolute;
-    min-height: 1px;
-    top: 70px;
-    width: 110px;
-}
- 
-#sidebar > .nav > .nav-menu > a {
-  border: 0px;
-  border-radius: 0px;
-  padding: 20px;
+/* This is side bar nav in projects page */
+
+@media (min-width: 768px) {
+  .sidebar-nav .navbar .navbar-collapse {
+    padding: 0;
+    max-height: none;
+  }
+  .sidebar-nav .navbar ul {
+    float: none;
+    display: block;
+  }
+  .sidebar-nav .navbar li {
+    float: none;
+    display: block;
+  }
+  .sidebar-nav .navbar li a {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
 }
 
+.col-sm-3 {
+    width: 12%;
+}

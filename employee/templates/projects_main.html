@@ -38,22 +38,22 @@
 
 {% block banner %}
     {% if user.is_authenticated %} 
-
-
-         <div class="row">
+        
+        <div class="container-fluid">
+        <div class="row">
+        <div class="col-sm-3">
           <div id="sidebar" class="sidebar-nav span3">
             <ul class="nav nav-pills nav-stacked">
             {% for x in proj_values %}
               <li class="nav-menu"><a href="/projects/{{ x.ID }}">{{ x.name }}</a></li>
             {% endfor %}
             </ul>
-          </div>
-
-           <h3>{{ first_proj.name }}</h3>
-       
-
-        <div class="container-fluid">
-         <table id='Proj_emp_table' border='1'>
+        </div>
+        </div>
+        <div class="col-sm-9">
+ 
+        <h3>{{ first_proj.name }}</h3>
+        <table id='Proj_emp_table' border='1'>
         <thead>
             <th>Employee ID</th>
             <th>Employee Name</th>
@@ -70,6 +70,8 @@
             </tr>
         {% endfor %}
         </table>
+        </div>
+        </div>
         </div>
          
     {% else %}
