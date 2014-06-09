@@ -11,42 +11,34 @@
 {% block extra_head %}
 
 {% block extra_script %}
+<script type="text/javascript" src="/site_media/static/js/dataTables/jquery.dataTables.columnFilter.js"></script>
+<script type="text/javascript" src="/site_media/static/js/exportjs/tableExport.js"></script>
+<script type="text/javascript" src="/site_media/static/js/exportjs/jquery.base64.js"></script>
+<script type="text/javascript" src="/site_media/static/js/exportjs/jspdf/libs/sprintf.js"></script>
+<script type="text/javascript" src="/site_media/static/js/exportjs/jspdf/jspdf.js"></script>
+<script type="text/javascript" src="/site_media/static/js/exportjs/jspdf/libs/base64.js"></script>
 <script type="text/javascript">
-   $(document).ready(function() {
-    var table = $('#Proj_emp_table').DataTable({
-                               // "scrollX": true,
-                                "dom": 'T<"clear">lfrtip',
-                                 "oTableTools": {
-            "sSwfPath": "/site_media/static/copy_csv_xls_pdf.swf",
-            "aButtons": [
-                "print",
-                "pdf",
-                {
-                    "sExtends": "xls",
-                    "sButtonText": "Excel",
-                    "sFileName": "*.xls"
-                }
 
-            ]
-        }
-                               
-                            
-                         });
- 
-    $("#Proj_emp_table tfoot th").each( function ( i ) {
-        var select = $('<select><option value=""></option></select>')
-            .appendTo( $(this).empty() )
-            .on( 'change', function () {
-                table.column( i )
-                    .search( $(this).val() )
-                    .draw();
-            } );
- 
-        table.column( i ).data().unique().sort().each( function ( d, j ) {
-            select.append( '<option value="'+d+'">'+d+'</option>' )
-        } );
-    } );
-} );
+$(document).ready(function(){
+ $('#Proj_emp_table').dataTable({"oSearch": {"bSmart": false}} )
+      .columnFilter({
+        aoColumns: [ {type:"text"},
+                 { type: "text" },
+                 { type: "text"},
+                 { type: "select" }
+                ],
+        
+    });
+});
+
+function exportxl()
+{
+    $('#Proj_emp_table').tableExport({type:'excel',escape:'false'});
+}
+function exportpdf()
+{
+    $('#Proj_emp_table').tableExport({type:'pdf',pdfFontSize:'6',escape:'false'});
+}
  
  </script>
 
@@ -72,6 +64,8 @@
         <div class="col-sm-9">
  
         <h4>{{ first_proj.name }}</h4>
+        <input type="button" value="Excel" onclick="exportxl();">
+        <input type="button" value="PDF" onclick="exportpdf();"> <br></br>
         <table id='Proj_emp_table' class="display" cellspacing="0" width="100%">
         <thead>
             <th>Employee ID</th>
