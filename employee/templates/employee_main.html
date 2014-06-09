@@ -13,43 +13,48 @@
 {% block extra_head %}
 
 {% block extra_script %}
+<script type="text/javascript" src="/site_media/static/js/dataTables/jquery.dataTables.columnFilter.js"></script>
+<script type="text/javascript" src="/site_media/static/js/exportjs/tableExport.js"></script>
+<script type="text/javascript" src="/site_media/static/js/exportjs/jquery.base64.js"></script>
+<script type="text/javascript" src="/site_media/static/js/exportjs/jspdf/libs/sprintf.js"></script>
+<script type="text/javascript" src="/site_media/static/js/exportjs/jspdf/jspdf.js"></script>
+<script type="text/javascript" src="/site_media/static/js/exportjs/jspdf/libs/base64.js"></script>
 <script type="text/javascript">
-$(document).ready(function() {
-    var table = $('#Emp_table').DataTable({
-                               // "scrollX": true,
-                                "dom": 'T<"clear">lfrtip',
-                                 "oTableTools": {
-            "sSwfPath": "/site_media/static/copy_csv_xls_pdf.swf",
-            "aButtons": [
-                "print",
-                "pdf",
-                {
-                    "sExtends": "xls",
-                    "sButtonText": "Excel",
-                    "sFileName": "*.xls"
-                }
 
-            ]
-        }
-                               
-                            
-                         });
- 
-    $("#Emp_table tfoot th").each( function ( i ) {
-        var select = $('<select><option value=""></option></select>')
-            .appendTo( $(this).empty() )
-            .on( 'change', function () {
-                table.column( i )
-                    .search( $(this).val() )
-                    .draw();
-            } );
- 
-        table.column( i ).data().unique().sort().each( function ( d, j ) {
-            select.append( '<option value="'+d+'">'+d+'</option>' )
-        } );
-    } );
-} );
+$(document).ready(function(){
+ $('#Emp_table').dataTable({"oSearch": {"bSmart": false}} )
+      .columnFilter({
+        aoColumns: [ {type:"text"},
+                 { type: "text" },
+                 { type: "select",bSmart:true},
+                 { type: "select" },
+                 { type: "select" },
+                 { type: "select",bRegex:true,
+                   values:[{ value: '^MS$', label: 'MS'},
+                           { value: 'MSC', label: 'MSC'},
+                           { value: 'M.E', label: 'M.E'}
+                          ]},
+                 { type: "select" },
+                 { type: "select" },
+                 { type: "select" },
+                 { type: "select" },
+                 { type: "select" }
+                ],
+        
+    });
+});
+
+function exportxl()
+{
+    $('#Emp_table').tableExport({type:'excel',escape:'false'});
+}
+function exportpdf()
+{
+    $('#Emp_table').tableExport({type:'pdf',pdfFontSize:'6',escape:'false'});
+}
+
  </script>
+
 
 
 {% endblock %}
@@ -60,15 +65,19 @@ $(document).ready(function() {
 {% block banner %}
     {% if user.is_authenticated %} 
         <h3>Employee Details</h3>
-        <table id='Emp_table'class="display" cellspacing="0" width="100%">
-         		<thead><th>EMP ID</th><th>NAME</th><th>Designation</th><th>Current Project</th>
+        <!-- <h4 onclick="exportxl()" >Export</h4> -->
+        <input type="button" value="Excel" onclick="exportxl();">
+        <input type="button" value="PDF" onclick="exportpdf();"> <br></br>
+        <table id="Emp_table" class="display dataTable" aria-describedby="example_info" style="width: auto;">
+        <!-- <table id='Emp_table'class="display" cellspacing="0"> -->
+         		<thead><th width="50px">EMP ID</th><th>NAME</th><th>Designation</th><th>Current Project</th>
                 <th>Billable Status</th>
-                <th>Qualifiction</th><th>Experience</th>    
+                <th>Qualifiction</th><th>Experience</th><th>Visa Status</th>    
                 </thead>
                 <tfoot>
-                	<tr><th>EMP ID</th><th>NAME</th><th>Designation</th><th>Current Project</th>
+                	<tr><th width="50px">EMP ID</th><th>NAME</th><th>Designation</th><th>Current Project</th>
                 <th>Billable Status</th>
-                <th>Qualifiction</th><th>Experience</th>    
+                <th>Qualifiction</th><th>Experience</th><th>Visa Status</th> 
                 </tr>
 
                 </tfoot>
@@ -76,17 +85,18 @@ $(document).ready(function() {
                 <tbody>
          {% for emp in all_employee %}
       	<tr>
-     		<td>{{emp.id}}</td><td><a href="/employee/{{ emp.id }}"> {{emp.name}} </td><td>{{emp.Designation}}</td>
+     		<td width="50px">{{emp.id}}</td><td><a href="/employee/{{ emp.id }}"> {{emp.name}} </td><td>{{emp.Designation}}</td>
             <td>{{emp.proj}}</td>
             <td>{{emp.bill}}</td>
             <td>{{emp.Qualification}}</td>
             <td>{{emp.exp}}</td>
+            <td>{{emp.Visa_Status}}</td>
         </tr>
   
         {% endfor %}
         </tbody>
         </table>
-      
+    
     {% else %}
 
     <h1>{% trans "Welcome to ASM" %}</h1>
