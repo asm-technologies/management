@@ -55,7 +55,11 @@ function exportpdf()
 {
     $('#Emp_table').tableExport({type:'pdf',pdfFontSize:'6',escape:'false'});
 }
-
+function poptastic(url)
+{
+    newwindow=window.open(url,'name','height=800,width=800','left=500');
+    if (window.focus) {newwindow.focus()}
+}
  </script>
 
 
@@ -88,7 +92,7 @@ function exportpdf()
                 <tbody>
          {% for emp in all_employee %}
       	<tr>
-     		<td>{{emp.id}}</td><td><a href="/employee/{{ emp.id }}"> {{emp.name}} </td><td>{{emp.Designation}}</td>
+     		<td>{{emp.id}}</td><td><a href="javascript:poptastic('/employee/{{ emp.id }}/');"> {{emp.name}} </td><td>{{emp.Designation}}</td>
             <td>{{emp.proj}}</td>
             <td>{{emp.bill}}</td>
             <td>{{emp.Qualification}}</td>
