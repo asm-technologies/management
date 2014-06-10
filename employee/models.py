@@ -17,7 +17,7 @@ class Employee(models.Model):
 	name = models.CharField(max_length = 100,verbose_name="Name")
 	dob = models.DateField(verbose_name='Date Of Birth')
 	doj = models.DateField(verbose_name='Date Of Joining')
-	exp = models.DecimalField(max_digits=4,decimal_places=2,verbose_name="Year of Experience")
+	exp = models.DecimalField(max_digits=4,decimal_places=2,verbose_name="Eperience Previous to ASM")
 	Designation = models.CharField(max_length = 100)
 	Qualification = models.CharField(max_length = 10,choices=qualif_choices)
 	Major_Subject = models.CharField(max_length = 100,blank=True,choices=sub_choices)
@@ -32,15 +32,8 @@ class Employee(models.Model):
 	personal_email = models.EmailField(max_length=50,blank=True)
 	bill = models.BooleanField(db_index=True,default=False)
 	proj = models.ForeignKey(Project)
-	start_date = models.DateField(blank=True)
+	start_date = models.DateField(blank=True,verbose_name='Billing Start Date')
 
 	def __unicode__(self):
 		return u"%s" % (self.name)
 
-
-
-
-class MonthlyWeatherByCity(models.Model):
-    month = models.IntegerField()
-    boston_temp = models.DecimalField(max_digits=5, decimal_places=1)
-    houston_temp = models.DecimalField(max_digits=5, decimal_places=1)
