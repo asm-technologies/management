@@ -12,7 +12,7 @@ class Project(models.Model):
 
 class Employee(models.Model):
 	qualif_choices = [('B.E','B.E'),('B.Tech','B.Tech'),('M.Tech','M.Tech'),('BSC','BSC'),('MCA','MCA'),('MS','MS'),('M.E','M.E'),('MS','MS'),('MSC','MSC'),('MBA','MBA')]
-	sub_choices = [('Computer Science','Computer Science'),('Information Technology','')]
+	sub_choices = [('Computer Science','Computer Science'),('Information Technology','Information Technology'),('Electornics','Electronics'),('Management','Management')]
 	id = models.IntegerField(max_length = 6,primary_key=True,verbose_name="Employee ID")
 	name = models.CharField(max_length = 100,verbose_name="Name")
 	dob = models.DateField(verbose_name='Date Of Birth')
@@ -20,10 +20,13 @@ class Employee(models.Model):
 	exp = models.DecimalField(max_digits=4,decimal_places=2,verbose_name="Year of Experience")
 	Designation = models.CharField(max_length = 100)
 	Qualification = models.CharField(max_length = 10,choices=qualif_choices)
-	# Major_Subject = models.CharField(max_length = 100,choices=sub_choices)
+	Major_Subject = models.CharField(max_length = 100,blank=True,choices=sub_choices)
 	Visa_Status = models.CharField(max_length = 100)
 	Skill_sets = models.CharField(max_length = 100)
-	# Address = models.CharField(max_length = 200,blank=True)
+	Add1 = models.CharField(max_length = 250,blank=True,verbose_name='Line1')
+	Add2 = models.CharField(max_length = 250,blank=True,verbose_name='Line2')
+	City = models.CharField(max_length = 30,blank=True)
+	Zip_code = models.CharField(max_length = 15,blank=True)
 	mobile=models.IntegerField(max_length = 12)
 	email = models.EmailField(max_length=50)
 	personal_email = models.EmailField(max_length=50,blank=True)

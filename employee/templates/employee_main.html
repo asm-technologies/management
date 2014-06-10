@@ -31,9 +31,12 @@ $(document).ready(function(){
                  { type: "select" },
                  { type: "select",bRegex:true,
                    values:[{ value: '^MS$', label: 'MS'},
-                           { value: 'MSC', label: 'MSC'},
-                           { value: 'M.E', label: 'M.E'}
+                           { value: '^M.Tech$', label: 'MSC'},
+                           { value: 'M.E', label: 'M.E'},
+                           { value: 'B.E', label: 'B.E'},
+                           { value: 'BSC', label: 'BSC'}
                           ]},
+                 { type: "select" },
                  { type: "select" },
                  { type: "select" },
                  { type: "select" },
@@ -72,12 +75,12 @@ function exportpdf()
         <!-- <table id='Emp_table'class="display" cellspacing="0"> -->
          		<thead><th width="50px">EMP ID</th><th>NAME</th><th>Designation</th><th>Current Project</th>
                 <th>Billable Status</th>
-                <th>Qualifiction</th><th>Experience</th><th>Visa Status</th>    
+                <th>Qualifiction</th><th>Major Subject</th><th>Experience</th><th>Visa Status</th>    
                 </thead>
                 <tfoot>
                 	<tr><th width="50px">EMP ID</th><th>NAME</th><th>Designation</th><th>Current Project</th>
                 <th>Billable Status</th>
-                <th>Qualifiction</th><th>Experience</th><th>Visa Status</th> 
+                <th>Qualifiction</th><th>Major Subject</th><th>Experience</th><th>Visa Status</th> 
                 </tr>
 
                 </tfoot>
@@ -85,10 +88,11 @@ function exportpdf()
                 <tbody>
          {% for emp in all_employee %}
       	<tr>
-     		<td width="50px">{{emp.id}}</td><td><a href="/employee/{{ emp.id }}"> {{emp.name}} </td><td>{{emp.Designation}}</td>
+     		<td>{{emp.id}}</td><td><a href="/employee/{{ emp.id }}"> {{emp.name}} </td><td>{{emp.Designation}}</td>
             <td>{{emp.proj}}</td>
             <td>{{emp.bill}}</td>
             <td>{{emp.Qualification}}</td>
+            <td>{{emp.Major_Subject}}</td>
             <td>{{emp.exp}}</td>
             <td>{{emp.Visa_Status}}</td>
         </tr>
