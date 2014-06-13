@@ -10,12 +10,16 @@ class Project(models.Model):
 	def __unicode__(self):
 		return u"%s" % (self.name)
 
+def upload_image_name(instance, filename):
+    extension = filename.split('.')[-1]
+    return "%s.%s" %(instance.id, extension)
+
 class Employee(models.Model):
 	qualif_choices = [('B.E','B.E'),('B.Tech','B.Tech'),('M.Tech','M.Tech'),('BSC','BSC'),('MCA','MCA'),('MS','MS'),('M.E','M.E'),('MS','MS'),('MSC','MSC'),('MBA','MBA')]
 	sub_choices = [('Computer Science','Computer Science'),('Information Technology','Information Technology'),('Electornics','Electronics'),('Management','Management')]
 	id = models.IntegerField(max_length = 6,primary_key=True,verbose_name="Employee ID")
 	name = models.CharField(max_length = 100,verbose_name="Name")
-	image = models.ImageField(upload_to = ".",blank=True,null=True)
+	image = models.ImageField(upload_to = upload_image_name,blank=True,null=True)
 	dob = models.DateField(verbose_name='Date Of Birth')
 	doj = models.DateField(verbose_name='Date Of Joining')
 	exp = models.DecimalField(max_digits=4,decimal_places=2,verbose_name="Eperience Previous to ASM")

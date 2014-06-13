@@ -60,6 +60,12 @@ function poptastic(url)
     newwindow=window.open(url,'name','height=800,width=800','left=500');
     if (window.focus) {newwindow.focus()}
 }
+
+function printFile(url) {
+        var w = window.open(url,'name','height=800,width=800','left=500');
+        w.onload = w.print;
+        w.focus();
+    }
  </script>
 
 
@@ -88,7 +94,6 @@ function poptastic(url)
                 </tr>
 
                 </tfoot>
-
                 <tbody>
          {% for emp in all_employee %}
       	<tr>
