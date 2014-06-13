@@ -12,6 +12,7 @@
 
 {% block extra_script %}
 <script type="text/javascript" src="/site_media/static/js/dataTables/jquery.dataTables.columnFilter.js"></script>
+<script type="text/javascript" src="/site_media/static/js/dataTables/jquery-ui-1.10.4.js"></script>
 <script type="text/javascript" src="/site_media/static/js/exportjs/tableExport.js"></script>
 <script type="text/javascript" src="/site_media/static/js/exportjs/jquery.base64.js"></script>
 <script type="text/javascript" src="/site_media/static/js/exportjs/jspdf/libs/sprintf.js"></script>
@@ -20,12 +21,14 @@
 <script type="text/javascript">
 
 $(document).ready(function(){
- $('#Proj_emp_table').dataTable({"oSearch": {"bSmart": false}} )
+    $.datepicker.regional[""].dateFormat = 'dd/mm/yy';
+$.datepicker.setDefaults($.datepicker.regional['']);
+ $('#Proj_emp_table').dataTable()
       .columnFilter({
         aoColumns: [ {type:"text"},
                  { type: "text" },
                  { type: "text" },
-                 { type: "text"},
+                 { type: "date-range"},
                  { type: "number-range" },
                  { type: "select" },
                  { type: "text" }
@@ -74,18 +77,20 @@ function poptastic(url)
         <h4>{{ first_proj.name }}</h4>
         <input type="button" value="Excel" onclick="exportxl();">
         <input type="button" value="PDF" onclick="exportpdf();"> <br></br>
-        <table id='Proj_emp_table' class="display" cellspacing="0" width="100%">
+        <table id='Proj_emp_table' class="display dataTable" aria-describedby="example_info">
         <thead>
+        <tr>
             <th>Employee ID</th>
             <th>Employee Name</th>
             <th>Experience Prior to ASM</th>
             <th>Joining Date</th>
             <th>Asm Experience</th>
             <th>Billing Start Date</th>
-            <!-- <th>Total Experience</th> -->
             <th>Bill Status</th>
+        </tr>
         </thead>
             <tfoot>
+            <tr>
             <th>Employee ID</th>
             <th>Employee Name</th>
             <th>Experience Prior to ASM</th>
@@ -93,6 +98,7 @@ function poptastic(url)
             <th>Asm Experience</th>
             <th>Billing Start Date</th>
             <th>Bill Status</th>
+            </tr>
             </tfoot>
         {% for x in employees %}
             <tr> 

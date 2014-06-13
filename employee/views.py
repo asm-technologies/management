@@ -36,7 +36,6 @@ def projects_main(request):
 				d1 =  datetime.date.today()
 				d2 =  x['doj']
 				yr_diff = (d1.year - d2.year)*12 + d1.month - d2.month
-				print "%s.%s" % (yr_diff/12,yr_diff%12)
 				x['asm_exp'] = "%s.%s" % (yr_diff/12,yr_diff%12)
 	return render_to_response("projects_main.html",{"projects":"active","proj_values":proj_values,"first_proj":first_proj,"employees":employees},context_instance=RequestContext(request))
 
@@ -48,7 +47,6 @@ def projects(request,proj_id):
 				d1 =  datetime.date.today()
 				d2 =  x['doj']
 				yr_diff = (d1.year - d2.year)*12 + d1.month - d2.month
-				print "%s.%s" % (yr_diff/12,yr_diff%12)
 				x['asm_exp'] = "%s.%s" % (yr_diff/12,yr_diff%12)
 	return render_to_response("projects.html",{"projects":"active","proj":proj[0],"employees":employees,"proj_values":proj_values},context_instance=RequestContext(request))
 
