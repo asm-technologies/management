@@ -1,6 +1,7 @@
 from django.core.management.base import NoArgsCommand
 from employee.models import *
 import random
+import datetime
 
 class Command(NoArgsCommand):
     help = "prints hello world"
@@ -10,7 +11,9 @@ class Command(NoArgsCommand):
     	emp_ids = Employee.objects.filter().values('id')
     	for x in emp_ids:
     	 	emp_val = Employee.objects.get(id=x['id'])
-    	 	emp_val.Major_Subject = random.choice(des)
+		if emp_val.doj == None:
+	    	 	emp_val.doj = datetime.date.today()
+			#print emp_val.doj
     	 	# print emp_val.Visa_Status
     	 	emp_val.save()
         

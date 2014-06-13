@@ -24,8 +24,11 @@ $(document).ready(function(){
       .columnFilter({
         aoColumns: [ {type:"text"},
                  { type: "text" },
+                 { type: "text" },
                  { type: "text"},
-                 { type: "select" }
+                 { type: "number-range" },
+                 { type: "select" },
+                 { type: "text" }
                 ],
         
     });
@@ -75,19 +78,29 @@ function poptastic(url)
         <thead>
             <th>Employee ID</th>
             <th>Employee Name</th>
-            <th>Start Date</th>
+            <th>Experience Prior to ASM</th>
+            <th>Joining Date</th>
+            <th>Asm Experience</th>
+            <th>Billing Start Date</th>
+            <!-- <th>Total Experience</th> -->
             <th>Bill Status</th>
         </thead>
             <tfoot>
             <th>Employee ID</th>
             <th>Employee Name</th>
-            <th>Start Date</th>
+            <th>Experience Prior to ASM</th>
+            <th>Joining Date</th>
+            <th>Asm Experience</th>
+            <th>Billing Start Date</th>
             <th>Bill Status</th>
             </tfoot>
         {% for x in employees %}
             <tr> 
                 <td>{{ x.id }} </td>
                 <td><a href="javascript:poptastic('/employee/{{ x.id }}/');">{{ x.name }}</td>
+                <td>{{ x.exp }}</td>
+                <td>{{ x.doj }}</td>
+                <td>{{ x.asm_exp }}</td>
                 <td>{{ x.start_date }} </td>
                 <td>{{ x.bill }} </td>
             </tr>
