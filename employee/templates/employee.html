@@ -2,6 +2,7 @@
 </head>
 <body>
 <h2>{{ employees.name }}</h2>
+<img src="/site_media/media/{{ employees.image }}" alt="{{ employees.name }}" width="82" height="82">
         {% for key,values in employees.items %}
             <tr><td> {{ key }} : {{ values }} </td></tr>
         {% endfor %}
