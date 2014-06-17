@@ -11,8 +11,20 @@
 {% block extra_head %}
 
 {% block extra_script %}
-<script type="text/javascript" src="/site_media/static/js/dataTables/jquery.dataTables.columnFilter.js"></script>
-<script type="text/javascript" src="/site_media/static/js/dataTables/jquery-ui-1.10.4.js"></script>
+
+<style type="text/css" title="currentStyle">
+            @import "http://jquery-datatables-column-filter.googlecode.com/svn/trunk/media/css/demo_page.css";
+            @import "http://jquery-datatables-column-filter.googlecode.com/svn/trunk/media/css/demo_table.css";
+            @import "http://jquery-datatables-column-filter.googlecode.com/svn/trunk/media/css/themes/base/jquery-ui.css";
+            
+</style>
+
+
+<script src="http://jquery-datatables-column-filter.googlecode.com/svn/trunk/media/js/jquery-1.4.4.min.js" type="text/javascript"></script>
+<script src="http://jquery-datatables-column-filter.googlecode.com/svn/trunk/media/js/jquery.dataTables.js" type="text/javascript"></script>
+<script src="http://jquery-datatables-column-filter.googlecode.com/svn/trunk/media/js/jquery-ui.js" type="text/javascript"></script>
+<script src="http://jquery-datatables-column-filter.googlecode.com/svn/trunk/media/js/jquery.dataTables.columnFilter.js" type="text/javascript"></script>
+
 <script type="text/javascript" src="/site_media/static/js/exportjs/tableExport.js"></script>
 <script type="text/javascript" src="/site_media/static/js/exportjs/jquery.base64.js"></script>
 <script type="text/javascript" src="/site_media/static/js/exportjs/jspdf/libs/sprintf.js"></script>
@@ -24,14 +36,14 @@ $(document).ready(function(){
     $.datepicker.regional[""].dateFormat = 'dd/mm/yy';
 $.datepicker.setDefaults($.datepicker.regional['']);
  $('#Proj_emp_table').dataTable()
-      .columnFilter({
+      .columnFilter({ 
         aoColumns: [ {type:"text"},
                  { type: "text" },
                  { type: "text" },
                  { type: "date-range"},
                  { type: "number-range" },
-                 { type: "select" },
-                 { type: "text" }
+                 { type: "date-range" },
+                 { type: "select" }
                 ],
         
     });
@@ -77,40 +89,41 @@ function poptastic(url)
         <h4>{{ first_proj.name }}</h4>
         <input type="button" value="Excel" onclick="exportxl();">
         <input type="button" value="PDF" onclick="exportpdf();"> <br></br>
-        <table id='Proj_emp_table' class="display dataTable" aria-describedby="example_info">
+        <table id='Proj_emp_table' class="display">
         <thead>
         <tr>
             <th>Employee ID</th>
             <th>Employee Name</th>
             <th>Experience Prior to ASM</th>
-            <th>Joining Date</th>
+            <th width="500px">Joining Date</th>
             <th>Asm Experience</th>
             <th>Billing Start Date</th>
             <th>Bill Status</th>
         </tr>
         </thead>
-            <tfoot>
-            <tr>
-            <th>Employee ID</th>
-            <th>Employee Name</th>
-            <th>Experience Prior to ASM</th>
-            <th>Joining Date</th>
-            <th>Asm Experience</th>
-            <th>Billing Start Date</th>
-            <th>Bill Status</th>
-            </tr>
-            </tfoot>
+            
         {% for x in employees %}
             <tr> 
                 <td>{{ x.id }} </td>
                 <td><a href="javascript:poptastic('/employee/{{ x.id }}/');">{{ x.name }}</td>
                 <td>{{ x.exp }}</td>
-                <td>{{ x.doj }}</td>
+                <td width="500px">{{ x.doj }}</td>
                 <td>{{ x.asm_exp }}</td>
                 <td>{{ x.start_date }} </td>
                 <td>{{ x.bill }} </td>
             </tr>
         {% endfor %}
+        <tfoot>
+            <tr>
+            <th>Employee ID</th>
+            <th>Employee Name</th>
+            <th>Experience Prior to ASM</th>
+            <th width="500px">Joining Date</th>
+            <th>Asm Experience</th>
+            <th>Billing Start Date</th>
+            <th>Bill Status</th>
+            </tr>
+         </tfoot>
         </table>
         </div>
         </div>
