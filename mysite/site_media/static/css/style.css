@@ -1,0 +1,205 @@
+body
+{
+padding:0px;
+}
+.main_div
+{
+	margin: 0 auto;
+    max-width: 1200px;
+    
+}
+#heading
+{
+	background: url('/site_media/static/home_bg.jpg');
+	color:green;
+	padding:0px;
+	height:117px;
+	z-index: -99;
+	border:0px;
+	width:100%;
+	min-width:1024px;
+	margin:0px;	
+}
+
+#centerDiv{
+	width:100%;
+		
+}
+
+#tabs
+{
+	background: -moz-linear-gradient(center top , #FFFFFF, #EEEEEE) repeat scroll 0 0 rgba(0, 0, 0, 0);
+	border: 1px solid #DFDFDF;
+	border-radius: 4px;
+	height: 51px;
+	width: 100%;
+    
+}
+#tabs ul li a 
+{
+	color: #04173D;
+	display: block;
+	float: left;
+	font-family: 'Asap';
+	font-size: 16px;
+	height: 49px;
+	line-height: 46px;
+	padding: 0 42px;
+}
+#tabs ul li:hover a {
+	background: none repeat scroll 0 0 #E9E9E9;
+	box-shadow: 0 0 1px 4px #DBDBDB inset;
+	color: #4D4D4D;
+	text-decoration: none;
+}
+
+#tabs ul li.active a {
+	background: -moz-linear-gradient(center top , 	#003380, 	#1975FF) repeat scroll 0 0 rgba(0, 0, 0, 0);
+	box-shadow: none;
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+#Content
+{
+	width:100%;
+	padding:13px 0px; 
+
+}
+
+.dropdown-menu
+ {
+ 
+	position: absolute;
+	top: 100%;
+	left: 0;
+	z-index: 1000;
+	display: none;
+	float: left;
+	min-width: 160px;
+	padding: 5px 0;
+	margin: 2px 0 0;
+	font-size: 14px;
+	list-style: none;
+	background-color: #fff;
+	margin-left:-88px;
+	background-clip: padding-box;
+	border: 1px solid #ccc;
+	border: 1px solid rgba(0, 0, 0, .15);
+	border-radius: 4px;
+	-webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+	box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+}
+
+.navbar-default 
+{
+	background: url('');
+	border: 0px ;
+	 
+}
+.navbar-default li
+{
+     background-color: #E7E7E7;
+	 
+}
+
+.navbar-nav > li > a {
+    line-height: 0;
+}
+
+.navbar-default .navbar-nav > li > a {
+    color: black;
+}
+.pull-right {
+    float: right;
+   
+}
+
+.navbar 
+{
+	margin: 0 auto;
+    width: 100%;
+}
+
+#tabs ul
+{
+	width:1024px;
+}
+
+#centerDiv .container {
+    width: 1024px;
+}
+
+
+#centerDiv .row {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top:auto;
+}
+
+
+#centerDiv .col-md-2 
+{
+    padding:10px 0px;	
+    width: 19.667%;
+}
+
+
+#centerDiv .col-md-10
+{
+    padding:0px 0px 0px 60px;
+    width: 500px;
+}
+
+#centerDiv .col-md-5 {
+    width: 70.667%;
+}
+
+#centerDiv .col-md-4
+{
+	padding:50px 0px;
+	width: 33.3333%;
+}
+
+/* This is datatable */
+#Emp_table
+{
+    border-collapse: collapse;
+    border-color: #FFFFFF;
+    border-spacing: 0;
+    border-style: solid;
+    border-width: 0;
+    font-family: arial,tahoma,verdana,sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+#Emp_table td {
+    height: 27px;
+    width: 191px;
+}
+
+/* This is side bar nav in projects page */
+
+@media (min-width: 768px) {
+  .sidebar-nav .navbar .navbar-collapse {
+    padding: 0;
+    max-height: none;
+  }
+  .sidebar-nav .navbar ul {
+    float: none;
+    display: block;
+  }
+  .sidebar-nav .navbar li {
+    float: none;
+    display: block;
+  }
+  .sidebar-nav .navbar li a {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+}
+
+.col-sm-3 {
+    width: 12%;
+}
