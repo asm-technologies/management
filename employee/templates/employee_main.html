@@ -39,7 +39,14 @@ $(document).ready(function(){
       .columnFilter({
         aoColumns: [ {type:"text"},
                  { type: "text" },
-                 { type: "select",bSmart:true},
+                 { type: "select",bRegex:true,
+                   values:[{ value: '^Software Engineer$', label: 'Software Engineer'},
+                           { value: '^Senior Software Engineer$', label: 'Senior Software Engineer'},
+                           { value: '^QA Lead$', label: 'QA Lead'},
+                           { value: '^Program Analyst$', label: 'Program Analyst'},
+                           { value: '^Project Manager$', label: 'Project Manager'},
+                           { value: '^System Engineer$', label: 'System Engineer'}
+                          ]},
                  { type: "select" },
                  { type: "select" },
                  { type: "select",bRegex:true,
@@ -50,7 +57,7 @@ $(document).ready(function(){
                            { value: 'BSC', label: 'BSC'}
                           ]},
                  { type: "select" },
-                 { type: "select" },
+                 { type: "number-range" },
                  { type: "select" },
                  { type: "select" },
                  { type: "select" },
