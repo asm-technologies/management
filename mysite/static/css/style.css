@@ -162,7 +162,7 @@ padding:0px;
 }
 
 /* This is datatable */
-#Emp_table
+/*#Emp_table
 {
     border-collapse: collapse;
     border-color: #FFFFFF;
@@ -178,7 +178,7 @@ padding:0px;
     height: 27px;
     width: 191px;
 }
-
+*/
 /* This is side bar nav in projects page */
 
 @media (min-width: 768px) {
@@ -230,4 +230,5 @@ padding:0px;
 .filter_column.filter_number_range.form-control{
 	display: table-footer-group;
 	border-width: 0px;
+	
 }

@@ -55,6 +55,7 @@ $(document).ready(function(){
                            { value: 'BSC', label: 'BSC'}
                           ]},
                  { type: "select" },
+                 { type: "text" },
                  { type: "number-range" },
                  { type: "select" },
                  { type: "select" },
@@ -96,16 +97,16 @@ function printFile(url) {
         <!-- <h4 onclick="exportxl()" >Export</h4> -->
         <input type="button" value="Excel" onclick="exportxl();">
         <input type="button" value="PDF" onclick="exportpdf();"> <br></br>
-        <table id="Emp_table" class="display dataTable" aria-describedby="example_info" style="width: auto;">
+        <table id="Emp_table" class="display">
         <!-- <table id='Emp_table'class="display" cellspacing="0"> -->
          		<thead><th width="50px">EMP ID</th><th>NAME</th><th>Designation</th><th>Current Project</th>
                 <th>Billable Status</th>
-                <th>Qualifiction</th><th>Major Subject</th><th>Experience</th><th>Visa Status</th>    
+                <th>Qualifiction</th><th>Major Subject</th><th>Skill Sets</th><th>Experience</th><th>Visa Status</th>    
                 </thead>
                 <tfoot>
                 	<tr><th width="50px">EMP ID</th><th>NAME</th><th>Designation</th><th>Current Project</th>
                 <th>Billable Status</th>
-                <th>Qualifiction</th><th>Major Subject</th><th>Experience</th><th>Visa Status</th> 
+                <th>Qualifiction</th><th>Major Subject</th><th>Sill Sets</th><th>Experience</th><th>Visa Status</th> 
                 </tr>
 
                 </tfoot>
@@ -117,6 +118,7 @@ function printFile(url) {
             <td>{{emp.bill}}</td>
             <td>{{emp.Qualification}}</td>
             <td>{{emp.Major_Subject}}</td>
+            <td>{{ emp.Skill_sets }}</td>
             <td>{{emp.exp}}</td>
             <td>{{emp.Visa_Status}}</td>
         </tr>

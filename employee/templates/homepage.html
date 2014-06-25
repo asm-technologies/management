@@ -16,16 +16,39 @@
 
 $(document).ready(function () {
   function createChart(container, text, valA, valB) {
-  $(container).highcharts({
+    $(container).highcharts({
     chart: {
         plotBackgroundColor: null,
         plotBorderWidth: null,
         plotShadow: false
     },
     tooltip: {
-        pointFormat: '{series.name}: {point.y}</b>'
+        pointFormat: '{series.name}: {point.percentage:.1f}%</b>'
     },
+    plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.y}',
+                    style: {
+                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                    }
+                }
+            }
+        },
+    labels: {
+items: [{
+html: '<b>Total: </b>'+(valA+valB),
+style: {
+  left: '10px',
+  top: '10px',
+  color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+}
+}]
 
+},
     title: { text: text },
     series: [{
       type: 'pie',
@@ -45,9 +68,7 @@ createChart('#dashboard{{ pjs.ID }}',"{{ pjs.proj_name }}",{{ pjs.bill }},{{ pjs
  
 });
         
-      
-
-        </script>
+ </script>
 {% endblock %}
 
 
