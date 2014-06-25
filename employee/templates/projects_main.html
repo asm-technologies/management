@@ -15,7 +15,6 @@
 <style type="text/css" title="currentStyle">
             @import "http://jquery-datatables-column-filter.googlecode.com/svn/trunk/media/css/demo_page.css";
             @import "http://jquery-datatables-column-filter.googlecode.com/svn/trunk/media/css/themes/base/jquery-ui.css";
-            
 </style>
 <link href="/site_media/static/css/demo_table.css" rel="stylesheet">
 
@@ -34,7 +33,28 @@
 $(document).ready(function(){
     $.datepicker.regional[""].dateFormat = 'dd/mm/yy';
 $.datepicker.setDefaults($.datepicker.regional['']);
- $('#Proj_emp_table').dataTable()
+datatotable();
+});
+function datatotable(proj_id)
+{
+    proj_id = proj_id || null;   // make default value as empty when called from document.ready and page loads
+$('#Proj_emp_table').dataTable({
+    "sAjaxSource": "/projects/project_json/"+proj_id,
+    "processing": true,
+    "serverSide": true,
+    "bDestroy": true,
+    "bRetrieve": false, 
+    "fnServerData": function ( sSource, aoData, fnCallback, oSettings ) {
+      oSettings.jqXHR = $.ajax( {
+        "dataType": 'json',
+        "type": "GET",
+        "url": sSource,
+        "data": aoData,
+        "success": fnCallback
+      } );
+    }
+    
+    })
       .columnFilter({ 
         aoColumns: [ {type:"text"},
                  { type: "text" },
@@ -46,7 +66,8 @@ $.datepicker.setDefaults($.datepicker.regional['']);
                 ],
         
     });
-});
+}
+
 
 function exportxl()
 {
@@ -61,6 +82,12 @@ function poptastic(url)
     newwindow=window.open(url,'name','height=800,width=800','left=500');
     if (window.focus) {newwindow.focus()}
 }
+function handleOnChange(dd1)
+{
+    $('#Proj_emp_table').dataTable().fnClearTable();
+    datatotable(dd1.value)
+   
+}
 
  </script>
 
@@ -73,35 +100,36 @@ function poptastic(url)
     {% if user.is_authenticated %} 
         
         <!-- <div class="container-fluid"> -->
-        <div class="row">
-        <div class="col-sm-3">
-          <div id="sidebar" class="sidebar-nav span3">
-            <ul class="nav nav-pills nav-stacked">
-            {% for x in proj_values %}
-              <li class="nav-menu"><a href="/projects/{{ x.ID }}">{{ x.name }}</a></li>
-            {% endfor %}
-            </ul>
-        </div>
-        </div>
-        <div class="col-sm-9">
- 
+        
+        <h4>
+        Select Project
+        <select onChange="handleOnChange(this);">
+        {% for x in proj_values %}
+          <option value="{{ x.ID }}">{{ x.name }}</option>
+        {% endfor %}
+        </select>
+        </h4>
         <h4>{{ first_proj.name }}</h4>
         <input type="button" value="Excel" onclick="exportxl();">
         <input type="button" value="PDF" onclick="exportpdf();"> <br></br>
-        <table id='Proj_emp_table' class="display">
+        <table id="Proj_emp_table" class="display dataTable" aria-describedby="example_info">
         <thead>
         <tr>
             <th>Employee ID</th>
             <th>Employee Name</th>
-            <th>Experience Prior to ASM</th>
+            <th width="20px">Experience Prior to ASM</th>
             <th>Joining Date</th>
             <th>Asm Experience</th>
             <th>Billing Start Date</th>
             <th>Bill Status</th>
         </tr>
         </thead>
-            
-        {% for x in employees %}
+        <tbody>
+            <tr>
+              <td></td>
+            </tr>
+        </tbody>
+        <!-- {% for x in employees %}
             <tr> 
                 <td>{{ x.id }} </td>
                 <td><a href="javascript:poptastic('/employee/{{ x.id }}/');">{{ x.name }}</td>
@@ -111,12 +139,12 @@ function poptastic(url)
                 <td>{{ x.start_date }} </td>
                 <td>{{ x.bill }} </td>
             </tr>
-        {% endfor %}
+        {% endfor %} -->
         <tfoot>
             <tr>
             <th>Employee ID</th>
             <th>Employee Name</th>
-            <th>Experience Prior to ASM</th>
+            <th width="20px">Experience Prior to ASM</th>
             <th>Joining Date</th>
             <th>Asm Experience</th>
             <th>Billing Start Date</th>
@@ -124,8 +152,8 @@ function poptastic(url)
             </tr>
          </tfoot>
         </table>
-        </div>
-        </div>
+        
+        
         <!-- </div> -->
          
     {% else %}
