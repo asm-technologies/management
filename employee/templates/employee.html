@@ -1,3 +1,30 @@
+
+<!-- CSS goes in the document HEAD or added to your external stylesheet -->
+<style type="text/css">
+table.gridtable {
+	font-family: verdana,arial,sans-serif;
+	font-size:11px;
+	color:#333333;
+	border-width: 1px;
+	border-color: #666666;
+	border-collapse: collapse;
+}
+table.gridtable th {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #666666;
+	background-color: #dedede;
+}
+table.gridtable td {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #666666;
+	background-color: #ffffff;
+}
+</style>
+
 <head>
 <script>
 function printDiv(divName) {
@@ -15,11 +42,33 @@ function printDiv(divName) {
 <body>
 <div id="printableArea">
 <h2>{{ employees.name }}</h2>
-<img src="/site_media/media/{{ employees.image }}" alt="{{ employees.name }}" width="82" height="82">
-        {% for key,values in employees.items %}
-            <tr><td> {{ key }} : {{ values }} </td></tr>
-        {% endfor %}
+<img src="/site_media/media/{{ employees.image }}" alt="{{ employees.name }}" style="float:right; "width="82" height="82">
+<h4>Personal Details:</h4>
+<!-- Table goes in the document BODY -->
+<table class="gridtable">
+<tr>
+	<th>Date Of Birth</th><th>Qualification</th><th>Major Subject</th><th>Mobile</th><th>Personal Email</th>
+</tr>
+<tr>
+	<td>{{employees.dob}}</td><td>{{employees.Qualification}}</td><td>{{employees.Major_Subject}}</td>
+	<td>{{employees.mobile}}</td><td>{{employees.personal_email}}</td>
+</tr>
+</table>
+<h4>Profession Details</h4>
+<table class="gridtable">
+<tr>
+	<th>Date Of Joining</th><th>Experience Before ASM</th><th>ASM Experience</th><th>Total Experience</th><th>Billing Start Date</th>
+	<th>Current Project</th><th>Designation</th><th>Visa Status</th><th>Skill Sets</th><th>Official Email</th>
+</tr>
+<tr>
+	<td>{{employees.doj}}</td><td>{{employees.exp}}</td><td>null</td>
+	<td>null</td><td>{{employees.start_date}}</td><td>{{employees.proj}}</td><td>{{employees.Designation}}</td>
+	</td>{{employees.Visa_Status}}</td><td>{{employees.Skill_sets}}</td><td>{{employees.email}}</td>
+</tr>
+</table>
 </div>
 <br/>
 <input type="button" onclick="printDiv('printableArea')" value="Print" />
 <body>
+
+
