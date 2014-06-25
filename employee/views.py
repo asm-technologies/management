@@ -5,7 +5,7 @@ from django.views.generic import TemplateView
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 
-
+from decimal import *
 from employee.models import *
 import datetime
 import json
@@ -30,8 +30,9 @@ def project_json(request,proj_id):
 				d2 =  x['doj']
 				yr_diff = (d1.year - d2.year)*12 + d1.month - d2.month
 				x['asm_exp'] = "%s.%s" % (yr_diff/12,yr_diff%12)
+				x['Total_exp'] = Decimal(x['asm_exp']) + Decimal(x['exp'])
 				name = '<a href="javascript:poptastic(\'/employee/%d/\');">%s</a>' % (x['id'],x['name'])
-				response_list.append([x['id'],name,str(x['exp']),str(x['doj']),str(x['asm_exp']),str(x['start_date']),str(x['bill'])])
+				response_list.append([x['id'],name,str(x['exp']),str(x['doj']),str(x['asm_exp']),str(x['Total_exp']),str(x['start_date']),str(x['bill'])])
 	#response_data = {"aaData":[[1,'naggappan',1.5,'April 30, 2013',2.5,'April 2, 2014',True],[2,'naggappan',1.5,'April 30, 2013',2.5,'April 2, 2014',True]]}
 	response_data = {"aaData":response_list}
 	return HttpResponse(json.dumps(response_data), content_type="application/json")
@@ -41,6 +42,11 @@ def employees_main(request):
 	for x in all_employee:
 		projs = Project.objects.filter(id=x['proj_id']).values()
 		x['proj'] = projs[0]['name']
+		d1 =  datetime.date.today()
+		d2 =  x['doj']
+		yr_diff = (d1.year - d2.year)*12 + d1.month - d2.month
+		x['asm_exp'] = "%s.%s" % (yr_diff/12,yr_diff%12)
+		x['Total_exp'] = Decimal(x['asm_exp']) + Decimal(x['exp'])
 	return render_to_response("employee_main.html",{"employee":"active",'all_employee':all_employee},context_instance=RequestContext(request))
 
 def employees(request,emp_id):
