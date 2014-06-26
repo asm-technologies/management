@@ -1,0 +1,29 @@
+{% extends "account/base.html" %}
+
+{% load url from future %}
+{% load bootstrap %}
+
+{% block body_class %}account account-settings{% endblock %}
+
+{% block head_title %}Account{% endblock %}
+{% block tab_bar %}
+<ul class="nav navbar-nav pull-left">
+       <li class='{{ home }}'><a  href="/">Dashboard</a></li>
+       <li class='{{ projects }}'><a href="/projects/">Project</a></li>
+       <li class='{{ employee }}'><a href="/employee/">Employee</a></li>
+       <li class='active'><a href="/settings/">settings</a></li>
+</ul>
+{% endblock %}
+{% block body %}
+
+    <div class="row">
+        <div class="col-md-5">
+            <form method="POST" action="{% url "account_settings" %}">
+                <legend>Account</legend>
+                {% csrf_token %}
+                {{ form|bootstrap }}
+                <button class="btn btn-primary" type="submit">Save</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
