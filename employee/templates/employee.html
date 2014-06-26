@@ -54,7 +54,7 @@ function printDiv(divName) {
 	<td>{{employees.mobile}}</td><td>{{employees.personal_email}}</td>
 </tr>
 </table>
-<h4>Profession Details</h4>
+<h4>Professional Details</h4>
 <table class="gridtable">
 <tr>
 	<th>Date Of Joining</th><th>Experience Before ASM</th><th>ASM Experience</th><th>Total Experience</th><th>Billing Start Date</th>
@@ -63,9 +63,14 @@ function printDiv(divName) {
 <tr>
 	<td>{{employees.doj}}</td><td>{{employees.exp}}</td><td>null</td>
 	<td>null</td><td>{{employees.start_date}}</td><td>{{employees.proj}}</td><td>{{employees.Designation}}</td>
-	</td>{{employees.Visa_Status}}</td><td>{{employees.Skill_sets}}</td><td>{{employees.email}}</td>
+	<td>{{employees.Visa_Status}}</td><td>{{employees.Skill_sets}}</td><td>{{employees.email}}</td>
 </tr>
 </table>
+<h4>Residence Address</h4>
+<p> {{employees.Add1}} </p>
+<p> {{employees.Add2}} </p>
+<p> City : {{employees.City}} </p>
+<p> Pin code :{{employees.Zip_code}} </p>
 </div>
 <br/>
 <input type="button" onclick="printDiv('printableArea')" value="Print" />

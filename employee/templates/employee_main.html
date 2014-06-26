@@ -76,12 +76,12 @@ function exportpdf()
 }
 function poptastic(url)
 {
-    newwindow=window.open(url,'name','height=800,width=800','left=500');
+    newwindow=window.open(url,'name','height=800,width=850','left=900');
     if (window.focus) {newwindow.focus()}
 }
 
 function printFile(url) {
-        var w = window.open(url,'name','height=800,width=800','left=500');
+        var w = window.open(url,'name','height=800,width=850','left=800');
         w.onload = w.print;
         w.focus();
     }
