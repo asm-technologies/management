@@ -204,6 +204,6 @@ padding:0px;
     width: 12%;
 }
 
-.form-control{
-  color:red;
+.filter_column.filter_number_range.form-control {
+   color:red;
 }
