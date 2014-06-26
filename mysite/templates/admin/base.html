@@ -1,6 +1,32 @@
-{% load admin_static %}{% load firstof from future %}<!DOCTYPE html>
+{% load staticfiles %}
+{% load url from future %}
+{% load admin_static %}{% load firstof from future %}
+<!DOCTYPE html>
 <html lang="{{ LANGUAGE_CODE|default:"en-us" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
 <head>
+<meta charset="utf-8" />
+        <link rel="shortcut icon" href="{% static "asm_logo.jpg" %}">
+        <title>{% block head_title_base %}{% if SITE_NAME %}{{ SITE_NAME }} | {% endif %}{% block head_title %}{% endblock %}{% endblock %}</title>
+        {% block viewport %}
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        {% endblock %}
+
+        {% block style_base %}
+            <link href="{% static "pinax/css/theme.css" %}" rel="stylesheet"> 
+          
+            <link href="{% static "bootstrap/css/bootstrap.css" %}" rel="stylesheet">
+            <link href="{% static "font-awesome/css/font-awesome.css" %}" rel="stylesheet">
+            <script src="{% block jquery_src %}{% static "pinax/js/jquery.js" %}{% endblock %}"></script>
+            <script src="{% static "bootstrap/js/bootstrap.min.js" %}"></script>
+            <script src="{% static "pinax/js/theme.js" %}"></script>
+            
+
+            <link href="{% static "css/style.css" %}" rel="stylesheet">
+            {% block extra_style %}{% endblock %}
+        {% endblock %}
+          {% block script_base %}
+                      {% block extra_script %}{% endblock %}
+          {% endblock %}
 <title>{% block title %}{% endblock %}</title>
 <link rel="stylesheet" type="text/css" href="{% block stylesheet %}{% static "admin/css/base.css" %}{% endblock %}" />
 {% block extrastyle %}{% endblock %}
@@ -11,45 +37,45 @@
 {% block blockbots %}<meta name="robots" content="NONE,NOARCHIVE" />{% endblock %}
 </head>
 {% load i18n %}
-
+{% block banner %}
 <body class="{% if is_popup %}popup {% endif %}{% block bodyclass %}{% endblock %}">
+<div class="main_div">
 
-<!-- Container -->
-<div id="container">
-
-    {% if not is_popup %}
-    <!-- Header -->
-    <div id="header">
-        <div id="branding">
-        {% block branding %}{% endblock %}
-        </div>
-        {% if user.is_active and user.is_staff %}
-        <div id="user-tools">
-            {% trans 'Welcome,' %}
-            <strong>{% firstof user.get_short_name user.get_username %}</strong>.
-            {% block userlinks %}
-                {% url 'django-admindocs-docroot' as docsroot %}
-                {% if docsroot %}
-                    <a href="{{ docsroot }}">{% trans 'Documentation' %}</a> /
-                {% endif %}
-                {% if user.has_usable_password %}
-                <a href="{% url 'admin:password_change' %}">{% trans 'Change password' %}</a> /
-                {% endif %}
-                <a href="/logout/">{% trans 'Log out' %}</a> /
-                <a href="/">Home</a>
+            {% block topbar_base %}
+                <header>
+                            
+                    <div id="heading" >
+                    <div class="navbar nav-default {% block navbar_class %}navbar-default{% endblock %}">
+                        <!-- <div class="container"> -->
+                        {% block topbar %}
+                        <div style="margin-top:17px;"><img src="{% static "logo.png" %}">{% block account_bar %}{% include "_account_bar.html" %}{% endblock %}</div>
+                            
+                        {% endblock %}
+                        </div>
+                    </div>
+                </header>
+                
             {% endblock %}
-        </div>
-        {% endif %}
-        {% block nav-global %}{% endblock %}
-    </div>
-    <!-- END Header -->
-    {% block breadcrumbs %}
-    <div class="breadcrumbs">
-    <a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
-    {% if title %} &rsaquo; {{ title }}{% endif %}
-    </div>
-    {% endblock %}
+            
+<!-- Container -->
+<div id='centerDiv'>
+<div id="tabs" align="center">
+        {% block tab_bar %}
+<ul class="nav navbar-nav pull-left">
+    {% if request.user.is_authenticated %}
+       <!-- <li class="active"><a href="#">Dashboard</a></li> -->
+       
+       <li class='{{ projects }}'><a href="/admin/employee/employee">Employee</a></li>
+       <li class='{{ employee }}'><a href="/admin/employee/project">Projects</a></li>
+       <li class='{{ employee }}'><a href="/admin/auth/user/">Users</a></li>
+
     {% endif %}
+</ul>
+
+        {% endblock %}
+        </div>
+
+   
 
     {% block messages %}
         {% if messages %}
@@ -75,6 +101,8 @@
     {% block footer %}<div id="footer"></div>{% endblock %}
 </div>
 <!-- END Container -->
-
+</div>
+{% endblock %}
+</div>
 </body>
 </html>

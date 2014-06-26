@@ -687,6 +687,7 @@ a.deletelink:hover {
 .object-tools a.viewsitelink, .object-tools a.golink {
     background: #999 url(../img/tooltag-arrowright.gif) top right no-repeat;
     padding-right: 28px;
+    
 }
 
 .object-tools a.viewsitelink:hover, .object-tools a.golink:hover {
@@ -696,6 +697,8 @@ a.deletelink:hover {
 .object-tools a.addlink {
     background: #999 url(../img/tooltag-add.gif) top right no-repeat;
     padding-right: 28px;
+    padding-bottom: 15px;
+    
 }
 
 .object-tools a.addlink:hover {
