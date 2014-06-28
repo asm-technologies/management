@@ -40,6 +40,9 @@ function datatotable(proj_id)
 {
     proj_id = proj_id || null;   // make default value as empty when called from document.ready and page loads
 $('#Proj_emp_table').dataTable({
+
+    "iDisplayLength": 10,
+    "aLengthMenu": [[10,25, 50, 100, -1], [10,25, 50, 100, "All"]],
     "sAjaxSource": "/projects/project_json/"+proj_id,
     "processing": true,
     "serverSide": true,
@@ -57,6 +60,7 @@ $('#Proj_emp_table').dataTable({
     
     })
       .columnFilter({ 
+        //sPlaceHolder: "head:before",
         aoColumns: [ {type:"text"},
                  { type: "text" },
                  { type: "number-range" },
@@ -126,6 +130,7 @@ function handleOnChange(dd1)
             <th>Billing Start Date</th>
             <th>Bill Status</th>
         </tr>
+
         </thead>
         <tbody>
             <tr>
