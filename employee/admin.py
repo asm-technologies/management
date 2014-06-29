@@ -17,9 +17,13 @@ class EmployeeAdmin(admin.ModelAdmin):
 			return self.readonly_fields + ('id',)
 		return self.readonly_fields
 
+class Billing_DetailAdmin(admin.ModelAdmin):
+   search_fields = ['emp_name__name']
+   list_display = ('emp_name','bill_type','start_date','end_date')
 
 # admin.site.unregister(Account)
 # admin.site.unregister(Eventlog)
 # admin.site.unregister(Sites)
 admin.site.register( Employee, EmployeeAdmin )
 admin.site.register( Project )
+admin.site.register( Billing_Detail,Billing_DetailAdmin)
