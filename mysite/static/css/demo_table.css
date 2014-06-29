@@ -382,3 +382,7 @@ div.box {
     display: table-footer-group;
     font-weight: bold;
 }
+tfoot {
+   
+    display: table-header-group;
+}
