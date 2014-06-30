@@ -7,6 +7,8 @@ from django.contrib import admin
 
 from account.views import SignupView, LoginView, LogoutView, DeleteView
 
+admin.autodiscover()
+
 urlpatterns = patterns("",
 	url(r"^$", LoginView.as_view(), name="account_login"),
 	url(r'', include('employee.urls')),
