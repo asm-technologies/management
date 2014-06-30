@@ -65,10 +65,10 @@
     {% if request.user.is_authenticated %}
        <!-- <li class="active"><a href="#">Dashboard</a></li> -->
        
-       <li class='{{ projects }}'><a href="/admin/employee/employee">Employee</a></li>
-       <li class='{{ employee }}'><a href="/admin/employee/project">Projects</a></li>
-       <li class=''><a href="/admin/employee/billing_detail/">Billing Info</a></li>
-       <li class=''><a href="/admin/auth/user/">User Registration</a></li>
+       <li class='{{ projects }}'><a href="{% url 'admin:index' %}employee/employee">Employee</a></li>
+       <li class='{{ employee }}'><a href="{% url 'admin:index' %}employee/project">Projects</a></li>
+       <li class=''><a href="{% url 'admin:index' %}employee/billing_detail/">Billing Info</a></li>
+       <li class=''><a href="{% url 'admin:index' %}auth/user/">User Registration</a></li>
 
     {% endif %}
 </ul>
