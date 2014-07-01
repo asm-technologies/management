@@ -101,14 +101,15 @@ function printFile(url) {
         <!-- <h4 onclick="exportxl()" >Export</h4> -->
         <input type="button" value="Excel" onclick="exportxl();">
         <input type="button" value="PDF" onclick="exportpdf();"> <br></br>
+        <div style="width: 1100px; height: 800px; overflow-y: hidden; scroll;">
         <table id="Emp_table" class="display">
         <!-- <table id='Emp_table'class="display" cellspacing="0"> -->
-         		<thead><th width="50px">EMP ID</th><th>NAME</th><th>Designation</th><th>Current Project</th>
+         		<thead width="200px"><th>EMP ID</th><th>NAME</th><th>Designation</th><th>Current Project</th>
                 <th>Billable Status</th>
                 <th>Qualifiction</th><th>Major Subject</th><th>Skill Sets</th><th>Total Experience</th><th>Visa Status</th>    
                 </thead>
                 <tfoot>
-                	<tr><th width="50px">EMP ID</th><th>NAME</th><th>Designation</th><th>Current Project</th>
+                	<tr><th>EMP ID</th><th>NAME</th><th>Designation</th><th>Current Project</th>
                 <th>Billable Status</th>
                 <th>Qualifiction</th><th>Major Subject</th><th>Sill Sets</th><th>Total Experience</th><th>Visa Status</th> 
                 </tr>
@@ -130,7 +131,7 @@ function printFile(url) {
         {% endfor %}
         </tbody>
         </table>
-    
+        </div>
     {% else %}
 
     <h1>{% trans "Welcome to ASM" %}</h1>
