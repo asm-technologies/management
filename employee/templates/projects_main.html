@@ -43,11 +43,12 @@ datatotable();
 function datatotable(proj_id)
 {
     proj_id = proj_id || null;   // make default value as empty when called from document.ready and page loads
+    var url_mask = "{% url 'employee.views.project_json' 123456 %}".replace(/123456/, proj_id);
 $('#Proj_emp_table').dataTable({
 
     "iDisplayLength": 10,
     "aLengthMenu": [[10,25, 50, 100, -1], [10,25, 50, 100, "All"]],
-    "sAjaxSource": "/project/project_json/"+proj_id,
+    "sAjaxSource": url_mask,
     "processing": true,
     "serverSide": true,
     "bDestroy": true,
