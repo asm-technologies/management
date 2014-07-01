@@ -38,6 +38,7 @@ Also install the dependent development packages,
 	yum install python-devel  ## python development package to compile and install pip packages
 
 Deploy Steps:
+
 	cd /var/www/
 	git clone https://github.com/asm-technologies/management.git
 	cd management
