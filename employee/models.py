@@ -45,7 +45,7 @@ class Employee(models.Model):
 class Billing_Detail(models.Model):
 	bill_choices = [('Permanent','Permanent'),('Temporary','Temporary')]
 	emp_name = models.ForeignKey(Employee)
-	# emp_proj = models.ForeignKey(Project)
+	emp_proj = models.ForeignKey(Project)
 	bill_type = models.CharField(max_length = 10,choices=bill_choices,verbose_name='Bill type')
 	start_date = models.DateField(blank=True,verbose_name='Billing Start Date',null=True,help_text="Enter only for Temporary billing")
 	end_date = models.DateField(blank=True,verbose_name='Billing End Date',null=True,help_text="Leave blank if currently working")

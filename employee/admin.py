@@ -19,7 +19,8 @@ class EmployeeAdmin(admin.ModelAdmin):
 
 class Billing_DetailAdmin(admin.ModelAdmin):
    search_fields = ['emp_name__name']
-   list_display = ('emp_name','bill_type','start_date','end_date')
+   list_display = ('emp_name','emp_proj','bill_type','start_date','end_date')
+   list_filter = ('emp_proj','bill_type')
 
 # admin.site.unregister(Account)
 # admin.site.unregister(Eventlog)
