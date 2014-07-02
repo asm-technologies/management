@@ -49,9 +49,7 @@ $(document).ready(function(){
                            { value: '^Project Manager$', label: 'Project Manager'},
                            { value: '^System Engineer$', label: 'System Engineer'}
                           ]},
-                 { type: "select" },
-                 { type: "select" },
-                 { type: "select",bRegex:true,
+                   { type: "select",bRegex:true,
                    values:[{ value: '^MS$', label: 'MS'},
                            { value: '^M.Tech$', label: 'MSC'},
                            { value: 'M.E', label: 'M.E'},
@@ -104,13 +102,11 @@ function printFile(url) {
         <div style="width: 1100px; height: 800px; overflow-y: hidden; scroll;">
         <table id="Emp_table" class="display">
         <!-- <table id='Emp_table'class="display" cellspacing="0"> -->
-         		<thead width="200px"><th>EMP ID</th><th>NAME</th><th>Designation</th><th>Current Project</th>
-                <th>Billable Status</th>
+         		<thead width="200px"><th>EMP ID</th><th>NAME</th><th>Designation</th>
                 <th>Qualifiction</th><th>Major Subject</th><th>Skill Sets</th><th>Total Experience</th><th>Visa Status</th>    
                 </thead>
                 <tfoot>
-                	<tr><th>EMP ID</th><th>NAME</th><th>Designation</th><th>Current Project</th>
-                <th>Billable Status</th>
+                	<tr><th>EMP ID</th><th>NAME</th><th>Designation</th>
                 <th>Qualifiction</th><th>Major Subject</th><th>Sill Sets</th><th>Total Experience</th><th>Visa Status</th> 
                 </tr>
 
@@ -118,9 +114,9 @@ function printFile(url) {
                 <tbody>
          {% for emp in all_employee %}
       	<tr>
-     		<td>{{emp.id}}</td><td><a href="javascript:poptastic('/employee/{{ emp.id }}/');"> {{emp.name}} </td><td>{{emp.Designation}}</td>
-            <td>{{emp.proj}}</td>
-            <td>{{emp.bill}}</td>
+     		<td>{{emp.id}}</td>
+            <td><a href="javascript:poptastic('/employee/{{ emp.id }}/');"> {{emp.name}} </td>
+            <td>{{emp.Designation}}</td>
             <td>{{emp.Qualification}}</td>
             <td>{{emp.Major_Subject}}</td>
             <td>{{ emp.Skill_sets }}</td>

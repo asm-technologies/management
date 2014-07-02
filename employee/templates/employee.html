@@ -66,6 +66,23 @@ function printDiv(divName) {
 	<td>{{employees.Visa_Status}}</td><td>{{employees.Skill_sets}}</td><td>{{employees.email}}</td>
 </tr>
 </table>
+
+<h4>Billing History</h4>
+<table class="gridtable">
+<tr>
+	<th>Project</th>
+	<!-- <th>Current Billing Status</th> -->
+	<th>Billing Start Date</th>
+	<th>Billing End Date</th>
+<tr>
+{% for bill in billing_history %}
+<tr>
+	<td>{{ bill.proj_name }}</td>
+	<td>{{ bill.start_date }}</td>
+	<td>{{ bill.end_date }}</td>
+<tr>
+{% endfor %}
+</table>
 <h4>Residence Address</h4>
 <p> {{employees.Add1}} </p>
 <p> {{employees.Add2}} </p>

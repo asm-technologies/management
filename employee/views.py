@@ -11,29 +11,39 @@ import datetime
 import json
 
 def project_json(request,proj_id):
-	projs = Project.objects.filter().values()
-	proj_values = []
-	for x in projs:
-		ID = x['id']
-		name = x['name']
-		description = x['description']
-		proj_values.append({"ID":ID,"name":name,"description":description})
-	if proj_id == 'null' :
-		first_proj = projs[0]
-		employees = Employee.objects.filter(proj=first_proj['id']).values()
-	else:
-		employees = Employee.objects.filter(proj=proj_id).values()
-	
 	response_list = []
-	for x in employees:
-				d1 =  datetime.date.today()
-				d2 =  x['doj']
-				yr_diff = (d1.year - d2.year)*12 + d1.month - d2.month
-				x['asm_exp'] = "%s.%s" % (yr_diff/12,yr_diff%12)
-				x['Total_exp'] = Decimal(x['asm_exp']) + Decimal(x['exp'])
-				name = '<a href="javascript:poptastic(\'/employee/%d/\');">%s</a>' % (x['id'],x['name'])
-				response_list.append([x['id'],name,str(x['exp']),str(x['doj']),str(x['asm_exp']),str(x['Total_exp']),str(x['start_date']),str(x['bill'])])
-	#response_data = {"aaData":[[1,'naggappan',1.5,'April 30, 2013',2.5,'April 2, 2014',True],[2,'naggappan',1.5,'April 30, 2013',2.5,'April 2, 2014',True]]}
+	tmp = {}
+	all_employee = Employee.objects.filter().values()
+	dist_emp_billing = Billing_Detail.objects.filter().values('emp_name_id').distinct()
+	for emp in all_employee:
+		tmp['emp_id'] = emp['id']
+		tmp['name'] = '<a href="javascript:poptastic(\'/employee/%d/\');">%s</a>' % (emp['id'],emp['name'])
+		tmp['bill'] = 'NO'
+		tmp['project'] = 'Not Assigned'
+		tmp['bill_type'] = 'Not Assigned'
+		tmp['start_bill'] = 'None'
+		tmp['end_bill'] = 'None'
+		for x in dist_emp_billing:
+			if emp['id'] == x['emp_name_id']:
+				emp_billing = Billing_Detail.objects.filter(emp_name_id=emp['id']).values().order_by('end_date')
+				if emp_billing[0]['bill_type'] == 'Permanent' :
+					emp_value = Billing_Detail.objects.get(id=emp_billing[0]['id'])
+					tmp['project'] = emp_value.emp_proj.name
+					tmp['bill'] = 'YES'
+					tmp['bill_type'] = 'Permanent'
+				if emp_billing[0]['bill_type'] == 'Temporary' :
+					
+					tmp['project'] = emp_value.emp_proj.name
+					tmp['bill_type'] = 'Temporary'
+					tmp['start_bill'] = str(emp_billing[0]['start_date'])
+					tmp['end_bill'] = str(emp_billing[0]['end_date'])
+					if tmp['end_bill'] == 'None' and tmp['start_bill'] != 'None':
+					 	tmp['bill'] = 'YES'
+
+				# for bill in emp_billing:
+		bill_query = [tmp['emp_id'],tmp['name'],tmp['project'],tmp['bill'],tmp['bill_type'],tmp['start_bill'],tmp['end_bill']]
+		response_list.append(bill_query)
+	
 	response_data = {"aaData":response_list}
 	return HttpResponse(json.dumps(response_data), content_type="application/json")
 
@@ -51,7 +61,18 @@ def employees_main(request):
 
 def employees(request,emp_id):
 	employees = Employee.objects.filter(id=emp_id).values()
-	return render_to_response("employee.html",{"employee":"active",'employees':employees[0]},context_instance=RequestContext(request))
+	bill_value = Billing_Detail.objects.filter(emp_name_id=emp_id).values().order_by('end_date')
+	bill_hist_list = []
+	for each_entry in bill_value:
+		tmp = {}
+		bill_hist = Billing_Detail.objects.get(id=each_entry['id'])
+		tmp['start_date'] = bill_hist.start_date
+		tmp['end_date'] = bill_hist.end_date
+		tmp['proj_name'] = bill_hist.emp_proj.name
+		bill_hist_list.append(tmp)
+	print bill_hist_list
+
+	return render_to_response("employee.html",{"employee":"active",'employees':employees[0],'billing_history':bill_hist_list},context_instance=RequestContext(request))
 
 def projects_main(request):
 	projs = Project.objects.filter().values()

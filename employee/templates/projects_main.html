@@ -14,7 +14,7 @@
 
 <style type="text/css" title="currentStyle">
             @import "/site_media/static/css/demo_page.css";
-            @import "/static/css/jquery-ui.css";
+            @import "/site_media/static/css/jquery-ui.css";
 </style>
 <link href="/site_media/static/css/demo_table.css" rel="stylesheet">
 
@@ -68,13 +68,12 @@ $('#Proj_emp_table').dataTable({
         //sPlaceHolder: "head:before",
         aoColumns: [ {type:"text"},
                  { type: "text" },
-                 { type: "number-range" },
-                 { type: "date-range"},
-                 { type: "number-range" },
-                 { type: "number-range" },
+                 { type: "select" },
+                 { type: "select" },
+                 { type: "select"},
                  { type: "date-range" },
-                 { type: "select" }
-                ],
+                 { type: "date-range" }
+              ],
         
     });
 }
@@ -112,28 +111,27 @@ function handleOnChange(dd1)
         
         <!-- <div class="container-fluid"> -->
         
-        <h4>
-        Select Project
-        <select onChange="handleOnChange(this);">
+        <h3>
+        Billing Informations
+        <!-- <select onChange="handleOnChange(this);">
         {% for x in proj_values %}
           <option value="{{ x.ID }}">{{ x.name }}</option>
         {% endfor %}
-        </select>
-        </h4>
+        </select> -->
+        </h3>
         <h4>{{ first_proj.name }}</h4>
         <input type="button" value="Excel" onclick="exportxl();">
         <input type="button" value="PDF" onclick="exportpdf();"> <br></br>
         <table id="Proj_emp_table" class="display dataTable" aria-describedby="example_info">
         <thead>
-        <tr>
+        <tr >
             <th>Employee ID</th>
             <th>Employee Name</th>
-            <th width="20px">Experience Prior to ASM</th>
-            <th>Joining Date</th>
-            <th>Asm Experience</th>
-            <th>Total Experience</th>
-            <th>Billing Start Date</th>
+            <th width="250px">Project</th>
             <th>Bill Status</th>
+            <th>Billing Type</th>
+            <th>Billing Start Date</th>
+            <th>Billing End Date</th>
         </tr>
 
         </thead>
@@ -155,14 +153,13 @@ function handleOnChange(dd1)
         {% endfor %} -->
         <tfoot>
             <tr>
-            <th>Employee ID</th>
+             <th>Employee ID</th>
             <th>Employee Name</th>
-            <th width="20px">Experience Prior to ASM</th>
-            <th>Joining Date</th>
-            <th>Asm Experience</th>
-            <th>Total Experience</th>
-            <th>Billing Start Date</th>
+            <th width="250px">Project</th>
             <th>Bill Status</th>
+            <th>Billing Type</th>
+            <th>Billing Start Date</th>
+            <th>Billing End Date</th>
             </tr>
          </tfoot>
         </table>
