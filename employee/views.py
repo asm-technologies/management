@@ -10,6 +10,20 @@ from employee.models import *
 import datetime
 import json
 
+from django import forms
+from django.http import HttpResponseRedirect
+
+class ContactForm(forms.Form):
+	emp_list = Employee.objects.filter()
+	proj_list = Project.objects.filter()
+	bill_type = ['Permanent','Temporary']
+	Employee = forms.ChoiceField(choices=zip(emp_list,emp_list))
+	Project =  forms.ChoiceField(choices=zip(proj_list,proj_list))
+	Billing_Type = forms.ChoiceField(choices=zip(bill_type,bill_type))
+	Billing_Start_Date = forms.DateField(help_text="yyyy-dd-mm")
+	Billing_End_Date = forms.DateField(help_text="yyyy-dd-mm")
+	
+
 def project_json(request,proj_id):
 	response_list = []
 	tmp = {}
@@ -98,5 +112,15 @@ def home(request):
 	
 
 	return render_to_response("homepage.html",{"home":"active",'mylist':dict1,"mylist2":dict2},context_instance=RequestContext(request))
+
+def addbilling(request):
+	if request.method == 'POST':
+	    form = ContactForm(request.POST) 
+	    return HttpResponseRedirect('/thanks/')
+	else:
+	    form = ContactForm()
+	return render(request, 'addbilling.html', {'form': form,})
+
+	
 	
 	

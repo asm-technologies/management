@@ -83,11 +83,13 @@ function exportxl()
 {
     $('#Proj_emp_table').tableExport({type:'excel',escape:'false'});
 }
-function exportpdf()
+function addbilling()
 {
-    $('#Proj_emp_table').tableExport({type:'pdf',pdfFontSize:'6',escape:'false'});
+    url = "{% url 'employee.views.addbilling' %}"
+    newwindow=window.open(url,'name','height=800,width=800','left=500');
+    if (window.focus) {newwindow.focus()}
 }
-function poptastic(url)
+function poptastic()
 {
     newwindow=window.open(url,'name','height=800,width=800','left=500');
     if (window.focus) {newwindow.focus()}
@@ -119,9 +121,10 @@ function handleOnChange(dd1)
         {% endfor %}
         </select> -->
         </h3>
-        <h4>{{ first_proj.name }}</h4>
-        <input type="button" value="Excel" onclick="exportxl();">
-        <input type="button" value="PDF" onclick="exportpdf();"> <br></br>
+        <input type="button" value="Export to Excel" onclick="exportxl();">
+        {% if request.user.is_staff %}
+        <input type="button" value="Add New Billing" onclick="addbilling();"> <br></br>
+        {% endif %}
         <table id="Proj_emp_table" class="display dataTable" aria-describedby="example_info">
         <thead>
         <tr >

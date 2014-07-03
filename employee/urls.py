@@ -11,6 +11,7 @@ urlpatterns = patterns("",
 	url(r"^employees/$",'employee.views.employees_main', name='employees_main'),
 	url(r"^employee/(?P<emp_id>.+?)/$",'employee.views.employees', name='employees'),
 	url(r"^projects/$",'employee.views.projects_main', name='projects_main'),
+	url(r"^addbilling/$",'employee.views.addbilling', name='addbilling'),
 	
 
 )
