@@ -27,4 +27,5 @@ class Billing_DetailAdmin(admin.ModelAdmin):
 # admin.site.unregister(Sites)
 admin.site.register( Employee, EmployeeAdmin )
 admin.site.register( Project )
+admin.site.register( Sub_Project )
 admin.site.register( Billing_Detail,Billing_DetailAdmin)

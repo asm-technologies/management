@@ -10,6 +10,14 @@ class Project(models.Model):
 	def __unicode__(self):
 		return u"%s" % (self.name)
 
+class Sub_Project(models.Model):
+	Project = models.ForeignKey(Project)
+	sub_proj = models.CharField(max_length = 100,verbose_name="Sub Project Name")
+	description = models.CharField(max_length = 254,blank=True,null=True)
+
+	def __unicode__(self):
+		return u"%s" % (self.name)
+
 def upload_image_name(instance, filename):
     extension = filename.split('.')[-1]
     return "%s.%s" %(instance.id, extension)

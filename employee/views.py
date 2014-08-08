@@ -17,8 +17,8 @@ class ContactForm(forms.Form):
 	emp_list = Employee.objects.filter()
 	proj_list = Project.objects.filter()
 	bill_type = ['Permanent','Temporary']
-	Employee = forms.ChoiceField(choices=zip(emp_list,emp_list))
-	Project =  forms.ChoiceField(choices=zip(proj_list,proj_list))
+	Employee = forms.ModelChoiceField(queryset=Employee.objects.all())
+	Project =  forms.ModelChoiceField(queryset=Project.objects.all())
 	Billing_Type = forms.ChoiceField(choices=zip(bill_type,bill_type))
 	Billing_Start_Date = forms.DateField(help_text="yyyy-dd-mm")
 	Billing_End_Date = forms.DateField(help_text="yyyy-dd-mm")
@@ -114,9 +114,24 @@ def home(request):
 	return render_to_response("homepage.html",{"home":"active",'mylist':dict1,"mylist2":dict2},context_instance=RequestContext(request))
 
 def addbilling(request):
+	form = ContactForm()
 	if request.method == 'POST':
-	    form = ContactForm(request.POST) 
-	    return HttpResponseRedirect('/thanks/')
+		spf = ContactForm(request.POST)
+		print spf.data
+		# if spf.is_valid():
+	 #        osp = spf.save()
+  #   	else:
+  #           pass
+	 #    billing = Employee.objects.get(id=student_id)
+	 #    scf = ContactForm(request.POST)
+	 #    if scf.is_valid():
+	 #        osc = scf.save(commit=False)
+	 #        osc.student = student
+	 #        osc.student_p = osp
+	 #        osc.save()
+	 #    else:
+	 #    	pass
+	 #        # raise error.
 	else:
 	    form = ContactForm()
 	return render(request, 'addbilling.html', {'form': form,})
