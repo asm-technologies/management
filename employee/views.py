@@ -10,20 +10,8 @@ from employee.models import *
 import datetime
 import json
 
-from django import forms
+from employee.forms import AddBillingForm
 from django.http import HttpResponseRedirect
-
-class ContactForm(forms.Form):
-	emp_list = Employee.objects.filter()
-	proj_list = Project.objects.filter()
-	bill_type = ['Permanent','Temporary']
-	Employee = forms.ModelChoiceField(queryset=Employee.objects.all())
-	Project =  forms.ModelChoiceField(queryset=Project.objects.all())
-	Sub_Project =  forms.ModelChoiceField(queryset=Sub_Project.objects.all())
-	Billing_Type = forms.ChoiceField(choices=zip(bill_type,bill_type))
-	Billing_Start_Date = forms.DateField(help_text="yyyy-dd-mm")
-	Billing_End_Date = forms.DateField(help_text="yyyy-dd-mm")
-	
 
 def project_json(request,proj_id):
 	response_list = []
@@ -110,31 +98,21 @@ def home(request):
 		dict1.append({"proj_name":proj_name,"bill":bill,"not_bill":not_bill,"ID":ID})
 		
 		dict2 = dict1[:]
-	
-
 	return render_to_response("homepage.html",{"home":"active",'mylist':dict1,"mylist2":dict2},context_instance=RequestContext(request))
 
 def addbilling(request):
-	form = ContactForm()
-	if request.method == 'POST':
-		spf = ContactForm(request.POST)
-		print spf.data
-		# if spf.is_valid():
-	 #        osp = spf.save()
-  #   	else:
-  #           pass
-	 #    billing = Employee.objects.get(id=student_id)
-	 #    scf = ContactForm(request.POST)
-	 #    if scf.is_valid():
-	 #        osc = scf.save(commit=False)
-	 #        osc.student = student
-	 #        osc.student_p = osp
-	 #        osc.save()
-	 #    else:
-	 #    	pass
-	 #        # raise error.
+	if request.method == 'GET':
+		form = AddBillingForm()
 	else:
-	    form = ContactForm()
+ 	    #A POST request
+	    form = AddBillingForm(request.POST)
+	    if form.is_valid():
+			emp_name = form['Employee']
+            proj = form.cleaned_data['Project']
+            #print emp_name
+            return HttpResponseRedirect('/projects')
+
+
 	return render(request, 'addbilling.html', {'form': form,})
 
 	
