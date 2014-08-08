@@ -8,32 +8,36 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
+        # Deleting field 'Sub_Project.name'
+        db.delete_column(u'employee_sub_project', 'name_id')
+
         # Adding field 'Sub_Project.Project'
         db.add_column(u'employee_sub_project', 'Project',
-                      self.gf('django.db.models.fields.related.ForeignKey')(default=2, to=orm['employee.Project']),
+                      self.gf('django.db.models.fields.related.ForeignKey')(default=1, to=orm['employee.Project']),
+                      keep_default=False)
+
+        # Adding field 'Sub_Project.sub_proj'
+        db.add_column(u'employee_sub_project', 'sub_proj',
+                      self.gf('django.db.models.fields.CharField')(default=1, max_length=100),
                       keep_default=False)
 
 
-        # Renaming column for 'Sub_Project.name' to match new field type.
-        db.rename_column(u'employee_sub_project', 'name_id', 'name')
-        # Changing field 'Sub_Project.name'
-        db.alter_column(u'employee_sub_project', 'name', self.gf('django.db.models.fields.CharField')(max_length=100))
-        # Removing index on 'Sub_Project', fields ['name']
-        db.delete_index(u'employee_sub_project', ['name_id'])
-
-
     def backwards(self, orm):
-        # Adding index on 'Sub_Project', fields ['name']
-        db.create_index(u'employee_sub_project', ['name_id'])
+
+        # User chose to not deal with backwards NULL issues for 'Sub_Project.name'
+        raise RuntimeError("Cannot reverse this migration. 'Sub_Project.name' and its values cannot be restored.")
+        
+        # The following code is provided here to aid in writing a correct migration        # Adding field 'Sub_Project.name'
+        db.add_column(u'employee_sub_project', 'name',
+                      self.gf('django.db.models.fields.related.ForeignKey')(to=orm['employee.Project']),
+                      keep_default=False)
 
         # Deleting field 'Sub_Project.Project'
         db.delete_column(u'employee_sub_project', 'Project_id')
 
+        # Deleting field 'Sub_Project.sub_proj'
+        db.delete_column(u'employee_sub_project', 'sub_proj')
 
-        # Renaming column for 'Sub_Project.name' to match new field type.
-        db.rename_column(u'employee_sub_project', 'name', 'name_id')
-        # Changing field 'Sub_Project.name'
-        db.alter_column(u'employee_sub_project', 'name_id', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['employee.Project']))
 
     models = {
         u'employee.billing_detail': {
@@ -80,7 +84,7 @@ class Migration(SchemaMigration):
             'Project': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['employee.Project']"}),
             'description': ('django.db.models.fields.CharField', [], {'max_length': '254', 'null': 'True', 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
+            'sub_proj': ('django.db.models.fields.CharField', [], {'max_length': '100'})
         }
     }
 

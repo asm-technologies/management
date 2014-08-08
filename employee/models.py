@@ -16,7 +16,7 @@ class Sub_Project(models.Model):
 	description = models.CharField(max_length = 254,blank=True,null=True)
 
 	def __unicode__(self):
-		return u"%s" % (self.name)
+		return u"%s" % (self.sub_proj)
 
 def upload_image_name(instance, filename):
     extension = filename.split('.')[-1]

@@ -19,6 +19,7 @@ class ContactForm(forms.Form):
 	bill_type = ['Permanent','Temporary']
 	Employee = forms.ModelChoiceField(queryset=Employee.objects.all())
 	Project =  forms.ModelChoiceField(queryset=Project.objects.all())
+	Sub_Project =  forms.ModelChoiceField(queryset=Sub_Project.objects.all())
 	Billing_Type = forms.ChoiceField(choices=zip(bill_type,bill_type))
 	Billing_Start_Date = forms.DateField(help_text="yyyy-dd-mm")
 	Billing_End_Date = forms.DateField(help_text="yyyy-dd-mm")
