@@ -103,15 +103,18 @@ def home(request):
 def addbilling(request):
 	if request.method == 'GET':
 		form = AddBillingForm()
+		employee = Employee.objects.get(id=3)
+		form=AddBillingForm(instance=employee)
 	else:
  	    #A POST request
 	    form = AddBillingForm(request.POST)
+	    print "form status----------------"
+	    print form.is_valid()
+	    
 	    if form.is_valid():
-			emp_name = form['Employee']
-            proj = form.cleaned_data['Project']
-            #print emp_name
-            return HttpResponseRedirect('/projects')
-
+			print "success validation"
+			form.save()
+            return HttpResponseRedirect('/thanks')
 
 	return render(request, 'addbilling.html', {'form': form,})
 
