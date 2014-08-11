@@ -12,6 +12,7 @@ def get_my_choices():
 class AddBillingForm(ModelForm):
         class Meta:
                 model = Billing_Detail
+                widgets = {'start_date': forms.DateInput(attrs={'class':'datepicker'}),}
 
 
 

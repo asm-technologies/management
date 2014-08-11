@@ -102,8 +102,8 @@ def home(request):
 
 def addbilling(request):
 	if request.method == 'GET':
-		form = AddBillingForm()
-		employee = Employee.objects.get(id=3)
+		#form = AddBillingForm()
+		employee = Employee.objects.get(id=2)
 		form=AddBillingForm(instance=employee)
 	else:
  	    #A POST request
