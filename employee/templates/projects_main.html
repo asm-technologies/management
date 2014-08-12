@@ -86,12 +86,12 @@ function exportxl()
 function addbilling()
 {
     url = "{% url 'employee.views.addbilling' %}"
-    newwindow=window.open(url,'name','height=800,width=800','left=500');
+    newwindow=window.open(url,"_blank", "toolbar=yes, scrollbars=yes, resizable=yes, top=100, left=500, width=700, height=800");
     if (window.focus) {newwindow.focus()}
 }
 function poptastic()
 {
-    newwindow=window.open(url,'name','height=800,width=800','left=500');
+    newwindow=window.open(url,'name','height=800,width=1000','left=1000');
     if (window.focus) {newwindow.focus()}
 }
 function handleOnChange(dd1)

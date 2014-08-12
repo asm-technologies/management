@@ -52,19 +52,22 @@ function printDiv(divName) {
 </head>
 <body>
 <div id="printableArea">
-<div class=".form-inline">
+<div class="col-md-3">
+<div class="form-horizontal">
     <form>
     <legend>Add Billing</legend>
     {% csrf_token %}
     {{ form|bootstrap }}
     <div class="form-actions">
       <button type="submit" class="btn btn-primary">Save changes</button>
+      <button type="button" class="btn btn-primary" onclick="printDiv('printableArea')" value="Print">Print Form</button>
     </div>
 	</form>
     </div>
+
+</div>
 </div>
 <br/>
-<input type="button" onclick="printDiv('printableArea')" value="Print" />
 <body>
 
 
