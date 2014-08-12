@@ -113,9 +113,9 @@ def addbilling(request):
 	    if form.is_valid():
 			print "success validation"
 			form.save()
-            return HttpResponseRedirect('/thanks')
+			return HttpResponse('/thanks')
 
-	return render(request, 'addbilling.html', {'form': form,})
+ 	return render(request, 'addbilling.html', {'form': form,})
 
 	
 	

@@ -54,7 +54,7 @@ function printDiv(divName) {
 <div id="printableArea">
 <div class="col-md-3">
 <div class="form-horizontal">
-    <form>
+    <form action="{% url 'employee.views.addbilling' %}" method="post">
     <legend>Add Billing</legend>
     {% csrf_token %}
     {{ form|bootstrap }}
