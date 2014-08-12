@@ -1,30 +1,22 @@
 
 <!-- CSS goes in the document HEAD or added to your external stylesheet -->
-<style type="text/css">
-table.gridtable {
-	font-family: verdana,arial,sans-serif;
-	font-size:11px;
-	color:#333333;
-	border-width: 1px;
-	border-color: #666666;
-	border-collapse: collapse;
-}
-table.gridtable th {
-	border-width: 1px;
-	padding: 8px;
-	border-style: solid;
-	border-color: #666666;
-	background-color: #dedede;
-}
-table.gridtable td {
-	border-width: 1px;
-	padding: 8px;
-	border-style: solid;
-	border-color: #666666;
-	background-color: #ffffff;
-}
-</style>
+{% load staticfiles %}
+{% load url from future %}
+{% load bootstrap %}
+{% block style_base %}
 
+            <link href="{% static "pinax/css/theme.css" %}" rel="stylesheet"> 
+          
+            <link href="{% static "bootstrap/css/bootstrap.css" %}" rel="stylesheet">
+            <link href="{% static "font-awesome/css/font-awesome.css" %}" rel="stylesheet">
+            <script src="{% block jquery_src %}{% static "pinax/js/jquery.js" %}{% endblock %}"></script>
+            <script src="{% static "bootstrap/js/bootstrap.min.js" %}"></script>
+            <script src="{% static "pinax/js/theme.js" %}"></script>
+            
+           
+            
+{% block extra_style %}   {% endblock %}
+        {% endblock %}
 <head>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css"> 
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
@@ -60,10 +52,16 @@ function printDiv(divName) {
 </head>
 <body>
 <div id="printableArea">
-<form action="{% url 'employee.views.addbilling' %}" method="post">{% csrf_token %}
-{{ form.as_p }}
-<input type="submit" value="Submit" />
-</form>
+<div class=".form-inline">
+    <form>
+    <legend>Add Billing</legend>
+    {% csrf_token %}
+    {{ form|bootstrap }}
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary">Save changes</button>
+    </div>
+	</form>
+    </div>
 </div>
 <br/>
 <input type="button" onclick="printDiv('printableArea')" value="Print" />
